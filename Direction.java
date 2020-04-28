@@ -1,5 +1,11 @@
 package Maestus.PocMan;
 
+/**
+ * Enumerates the different directions that could be taken in (x, y) coordinates
+ * There are four directions: UP, DOWN, LEFT, RIGHT
+ * @author Oracle
+ *
+ */
 public enum Direction {
 	// Java draws a canvas from the top left corner to the bottom right
 	// Thus, the (0, 0) coordinate is at the top left

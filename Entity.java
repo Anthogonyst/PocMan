@@ -1,5 +1,10 @@
 package Maestus.PocMan;
 
+/**
+ * An abstract class that shares all features common to a game object
+ * @author Oracle
+ *
+ */
 public class Entity {
 	int x = 150;
 	int y = 150;

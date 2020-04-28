@@ -3,6 +3,11 @@ package Maestus.PocMan;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * Handles all of the keyboard inputs to play the game
+ * @author Oracle
+ *
+ */
 public class InputManager {
 
 	static KeyAdapter newController(Entity e) {
