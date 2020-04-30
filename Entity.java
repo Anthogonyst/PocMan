@@ -1,5 +1,7 @@
 package Maestus.PocMan;
 
+import java.awt.Rectangle;
+
 /**
  * An abstract class that shares all features common to a game object
  * @author Oracle
@@ -8,10 +10,29 @@ package Maestus.PocMan;
 public class Entity {
 	int x = 150;
 	int y = 150;
-	int speed = 3;
-	int velocity = 3;
-	Direction facing = Direction.RIGHT;
-	Direction buffer = Direction.RIGHT;
+	int speed ;
+	int velocity;
+	Direction facing;
+	//Direction buffer = Direction.RIGHT;  // only the player will have this
+	Collider box;
+	
+	public Entity() {
+		x = 150;
+		y = 150;
+		speed = 3;
+		velocity = 3;
+		facing = Direction.RIGHT;
+		box = new Collider<Entity>(this, Collision.GHOST);
+	}
+	
+	public Entity(int _x, int _y, int _speed) {
+		x = _x;
+		y = _y;
+		facing = Direction.UP;
+		speed = _speed;
+		velocity = 0;
+		box = new Collider<Entity>(this, Collision.GHOST);
+	}
 	
 	void move() {
 		if (true /* not facing a wall */) {
