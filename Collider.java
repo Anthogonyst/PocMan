@@ -3,16 +3,16 @@ package Maestus.PocMan;
 import java.awt.Rectangle;
 
 public class Collider<T extends Entity> {
-    int width;
-    int height;
-    T parent;
-    Collision layer;
+    private final int width;
+    private final int height;
+    private final T parent;
+    private final Collision layer;
     
-    public Collider(T _parent, Collision mask) {
+    public Collider(T _parent, Collision mask, int size) {
     	this.parent = _parent;
     	layer = mask;
-    	width = 4;
-    	height = 4;
+    	width = size;
+    	height = size;
     }
 
     public Rectangle getBounds() {

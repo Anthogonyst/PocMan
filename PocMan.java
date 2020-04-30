@@ -25,20 +25,22 @@ public class PocMan extends JFrame implements IApplication {
 	// private Grid grid;
 
 	public PocMan() {
+		display = new DrawCanvas();
+
+		Board board = new Board();
 		user = new Entity();
 		ghosts = new Entity[4];
 		
 		for (int i = 0; i < 4; i++) {
 			ghosts[i] = new Entity();
 		}
-		
-		//initGrid();
+
+		display.addEntity(user);
+		board.initBoard();
 		
 		setSize(800,600);
 		setLocationRelativeTo(null);
 
-		display = new DrawCanvas();
-		display.addEntity(user);
 
 		addKeyListener(InputManager.newController(user));
 		setFocusable(true);

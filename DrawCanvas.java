@@ -43,9 +43,15 @@ public class DrawCanvas extends JPanel {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
 		for (Entity e : entities) {
-			// if (e.hasGraphics) return e.graphics; else { draw rectangle; }
-			g.setColor(Color.RED);
-			g.fillRect(e.x, e.y, 30, 30);
+			e.sprite.paintComponent(g);
 		}
+	}
+	
+	enum DrawOptions {
+		RED,
+		BLUE,
+		YELLOW,
+		WHITE,
+		BLACK;
 	}
 }
