@@ -1,5 +1,7 @@
 package Maestus.PocMan;
 
+//please commit
+
 /**
  * A time keeping program that maintains a consistent frame rate for the application
  * 
@@ -36,7 +38,7 @@ public class AppStep<T extends IApplication> {
 					executionStamp = System.nanoTime() / UPDATEUNIT;
 				}
 				
-				// Updating the ui should always be able to have unlimited FPS if you don´t want the user to lock it manually
+				// Updating the ui should always be able to have unlimited FPS if you donï¿½t want the user to lock it manually
 				app.updateUI();
 			}
 		} catch (InterruptedException e) {
