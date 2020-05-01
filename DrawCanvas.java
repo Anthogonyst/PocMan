@@ -39,19 +39,12 @@ public class DrawCanvas extends JPanel {
 	}
 	
 	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		g.setColor(Color.black);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
 		for (Entity e : entities) {
 			e.sprite.paintComponent(g);
 		}
-	}
-	
-	enum DrawOptions {
-		RED,
-		BLUE,
-		YELLOW,
-		WHITE,
-		BLACK;
 	}
 }

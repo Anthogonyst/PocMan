@@ -4,8 +4,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 
-import Maestus.PocMan.Sprite.DrawOptions;
-
 /**
  * An abstract class that shares all features common to a game object
  * @author Oracle
@@ -21,13 +19,13 @@ public class Entity {
 	Sprite sprite;
 	
 	public Entity() {
-		x = 150;
-		y = 150;
+		x = 180;
+		y = 180;
 		speed = 3;
 		velocity = 3;
 		facing = Direction.RIGHT;
 		box = new Collider<Entity>(this, Collision.GHOST, 4);
-		sprite = new Sprite<Entity>(this, 30, DrawOptions.PAINT_RED);
+		sprite = new Sprite<Entity>(this, Board.BOARD_PIECE_SIZE, DrawOptions.PAINT_RED);
 	}
 	
 	public Entity(int _x, int _y, int _speed) {
@@ -37,7 +35,7 @@ public class Entity {
 		speed = _speed;
 		velocity = 0;
 		box = new Collider<Entity>(this, Collision.GHOST, 4);
-		sprite = new Sprite<Entity>(this, 30, DrawOptions.PAINT_RED);
+		sprite = new Sprite<Entity>(this, Board.BOARD_PIECE_SIZE, DrawOptions.PAINT_RED);
 	}
 	
 	void move() {
@@ -57,6 +55,11 @@ public class Entity {
 	
 	void updateSpeed() {
 		// increase speed every level
+	}
+	
+	boolean checkCollisions() {
+		return false;
+		// check the collisions here
 	}
 	
 	protected void paintComponent(Graphics g) {

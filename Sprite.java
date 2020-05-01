@@ -48,13 +48,4 @@ public class Sprite<T extends Entity> {
 		default: g.setColor(Color.RED); g.fillRect(parent.x - width/2, parent.y - height/2, width, height); return;
 		}
 	}
-	
-	enum DrawOptions {
-		SINGLE,
-		MULTI,
-		PAINT_RED,
-		PAINT_BLUE,
-		PAINT_YELLOW,
-		PAINT_WHITE;
-	}
 }

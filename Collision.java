@@ -21,7 +21,7 @@ enum Collision {
 		case WALL: return 1; // something touched a wall, turn _this away please
 		case PLAYER: return 2; // a ghost touched a player, start game over or get eaten; may break with multiplayer
 		case GHOST: return -1; // ignore this
-		case PELLET: return -1; // ignore this
+		case PELLET: return 4; // something touched an intersection
 		default: { System.out.println("Other collision shouldn't be reached."); return -1; }
 		}
 	}

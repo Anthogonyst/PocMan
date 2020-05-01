@@ -1,7 +1,5 @@
 package Maestus.PocMan;
 
-import Maestus.PocMan.Sprite.DrawOptions;
-
 public class Wall extends Entity {
 	
 	Collider bigBox;
@@ -9,7 +7,7 @@ public class Wall extends Entity {
 	public Wall(int _x, int _y, int size) {
 		super(_x, _y, 0);
 		bigBox = new Collider<Entity>(this, Collision.WALL, size);
-		sprite = new Sprite<Entity>(this, 30, DrawOptions.PAINT_BLUE);
+		sprite = new Sprite<Entity>(this, Board.BOARD_PIECE_SIZE, DrawOptions.PAINT_BLUE);
 	}
 	
 	@Override
