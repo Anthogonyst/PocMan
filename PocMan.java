@@ -29,12 +29,15 @@ public class PocMan extends JFrame implements IApplication {
 
 		Board board = new Board();
 		user = new Entity();
-		ghosts = new Entity[4];
 		
-		for (int i = 0; i < 4; i++) {
-			ghosts[i] = new Entity();
+		int n = 40;
+		ghosts = new Ghost[n];
+		
+		for (int i = 0; i < n; i++) {
+			ghosts[i] = new Ghost(180, 180, 3, user);
+			display.addEntity(ghosts[i]);
 		}
-
+		
 		display.addEntity(user);
 		board.initBoard();
 		
@@ -53,6 +56,10 @@ public class PocMan extends JFrame implements IApplication {
 	@Override
 	public void nextFrame() {
 		user.move();
+		
+		for (Entity g : ghosts) {
+			g.move();
+		}
 		repaint();
 	}
 	

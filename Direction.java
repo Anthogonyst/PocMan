@@ -34,4 +34,18 @@ public enum Direction {
 			}
 		}
 	}
+	
+	public static Vector2 drawVector(Direction dir, int magnitude) {
+		return new Vector2(dir.x * magnitude, dir.y * magnitude);
+	}
+
+	public String toString() {
+		switch(this) {
+		case UP: return "DOWN";
+		case DOWN: return "UP";
+		case LEFT: return "RIGHT";
+		case RIGHT: return "LEFT";
+		default: return "No direction???";
+		}
+	}
 };

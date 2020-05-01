@@ -42,7 +42,7 @@ public class Sprite<T extends Entity> {
 		case SINGLE: return;
 		case MULTI: return;
 		case PAINT_RED: g.setColor(Color.RED); g.fillRect(parent.x - width/2, parent.y - height/2, width, height); return;
-		case PAINT_BLUE: g.setColor(Color.BLUE); g.fillRect(parent.x - width/2, parent.y - height/2, width, height); return;
+		case PAINT_BLUE: Color blueish = new Color(0, 0, 255, 127); g.setColor(blueish); g.fillRect(parent.x - width/2, parent.y - height/2, width, height); return;
 		case PAINT_YELLOW: g.setColor(Color.YELLOW); g.fillRect(parent.x - width/2, parent.y - height/2, width, height); return;
 		case PAINT_WHITE: g.setColor(Color.WHITE); g.fillRect(parent.x - width/2, parent.y - height/2, width, height); return;
 		default: g.setColor(Color.RED); g.fillRect(parent.x - width/2, parent.y - height/2, width, height); return;

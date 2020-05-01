@@ -63,6 +63,20 @@ public class Board {
 			
 	}
 	
+	public static ArrayList<Direction> queryCoords(int x, int y) {
+		int gridX = x / BOARD_PIECE_SIZE;
+		int gridY = y / BOARD_PIECE_SIZE;
+		
+		return queryChoices(gridX, gridY);
+	}
+	
+	public static Vector2 queryAxis(int x, int y) {
+		int gridX = x / BOARD_PIECE_SIZE;
+		int gridY = y / BOARD_PIECE_SIZE;
+		
+		return new Vector2(gridX, gridY);
+	}
+	
 	public static void initBoard() {
 		int arr = board.length;
 		int arrLong = board[0].length;
@@ -71,10 +85,10 @@ public class Board {
 			for (int i = 0; i < arr; i++) {
 				for (int j = 0; j < arrLong; j++) {
 					if (board[i][j]) {
-						Pellet p = new Pellet(i*BOARD_PIECE_SIZE, j*BOARD_PIECE_SIZE, 4);
+						Pellet p = new Pellet(j*BOARD_PIECE_SIZE, i*BOARD_PIECE_SIZE, 4);
 						DrawCanvas.addEntity(p);
 					} else {
-						Wall w = new Wall(i*BOARD_PIECE_SIZE, j*BOARD_PIECE_SIZE, BOARD_PIECE_SIZE);
+						Wall w = new Wall(j*BOARD_PIECE_SIZE, i*BOARD_PIECE_SIZE, BOARD_PIECE_SIZE);
 						DrawCanvas.addEntity(w);
 					}
 				}
