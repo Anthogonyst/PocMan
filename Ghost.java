@@ -13,15 +13,15 @@ public class Ghost extends Entity {
 		x += facing.x * velocity;
 		y += facing.y * velocity;
 		
-		int get = checkCollisions();
+		boolean notTouchingWall = checkCollisions();
 		
-		if (true /* not facing a wall */) {
+		if (notTouchingWall) {
 			velocity = speed;
 		} else velocity = 0;
 		
 	}
 	
-	int checkCollisions() {
-		
+	boolean checkCollisions() {
+		return true;
 	}
 }
