@@ -34,12 +34,17 @@ public class Ghost extends Entity {
 		lerpX += velocity;
 		lerpY += velocity;
 		
-		if (x + dx < 15 || y + dy < 15 || x + dx > 800 || y + dy > 800) {
-			speed = 0;
-			velocity = 0;
+		// Soft patch for going out of bounds; delete when there isn't something wrong
+		if (outofBounds(dx, dy)) {
+			lerpX = 0;
+			lerpY = 0;
+			Vector2 pos = Board.queryAxis(x, y);
+			axisX = pos.x;
+			axisY = pos.y;
 			return;
 		}
 		
+		// The entity implicitly reached an intersection if this is true
 		if (lerpX >= Board.BOARD_PIECE_SIZE || lerpY >= Board.BOARD_PIECE_SIZE || lerpX < 0 || lerpY < 0) {
 			Vector2 pos = Board.queryAxis(x + dx, y + dy);
 			axisX = pos.x;
@@ -52,12 +57,19 @@ public class Ghost extends Entity {
 			ArrayList<Direction> dirs = Board.queryChoices(axisX, axisY);
 			facing = newDirection(dirs);
 			
-			// add positional correction here
+			// If entity passes intersection slightly, center onto intersection and go
+			Vector2 correction = Direction.drawVector(oldDirection, lerpX + lerpY);
+			x -= correction.x;
+			y -= correction.y;
 			
+			// Might need to set lerp to 0 but it seems fine so far without it; unit test for certainty
+			
+			x += dx;
+			y += dy;
+		} else {
+			x += dx;
+			y += dy;
 		}
-		
-		x += dx;
-		y += dy;
 		//System.out.println("After:  " + printIsADebugFeatureISwear());
 	}
 	
@@ -66,10 +78,33 @@ public class Ghost extends Entity {
 	}
 	
 	private Direction newDirection(ArrayList<Direction> dirs) {
+		if (dirs.contains(Direction.backwards(facing))) {
+			dirs.remove(Direction.backwards(facing));
+		}
+		
 		if (dirs.size() > 0) {
 			int rand = (int)(Math.ceil(dirs.size()*Math.random()) % dirs.size());
 			return dirs.get(rand);
 		} else return facing;
+	}
+	
+	private boolean outofBounds(int dx, int dy) {
+		if (x + dx >= 15 || y + dy >= 15 || x + dx <= 905 || y + dy <= 905)
+			return false;
+		
+		if (x + dx < 15)
+			x = 890;
+			
+		if (y + dy < 15)
+			y = 890;
+			
+		if (x + dx > 905)
+			x = 30;
+		
+		if (y + dy > 905)
+			y = 30;
+		
+		return true;
 	}
 	
 	public String printIsADebugFeatureISwear() {

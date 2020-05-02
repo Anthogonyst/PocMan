@@ -23,7 +23,7 @@ public class Board {
 			{false, false, false, false, false, false, true, false, false, true, true, true, true, true, true, true, true, true, true, false, false, true, false, false, false, false, false, false},
 			{false, false, false, false, false, false, true, false, false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false, false, false, false, false},
 			{false, false, false, false, false, false, true, false, false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false, false, false, false, false},
-			{false, true, true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, true, true, true, true, true, true, true, true, true, false}, //teleporting row
+			{false, true, true, true, true, /**/false, /**/true, true, true, true, false, false, false, false, false, false, false, false, true, true, true, true, /**/false,/**/ true, true, true, true, false}, //teleporting row
 			{false, false, false, false, false, false, true, false, false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false, false, false, false, false},
 			{false, false, false, false, false, false, true, false, false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false, false, false, false, false},
 			{false, false, false, false, false, false, true, false, false, true, true, true, true, true, true, true, true, true, true, false, false, true, false, false, false, false, false, false},
@@ -50,14 +50,21 @@ public class Board {
 	 * @return An ArrayList<Direction> of valid directions
 	 */
 	public static ArrayList<Direction> queryChoices(int x, int y){
+		boolean drawDebugPaths = false;
+		
+		if (drawDebugPaths) {
+			DebugSquare d = new DebugSquare(x*BOARD_PIECE_SIZE, y*BOARD_PIECE_SIZE, Board.BOARD_PIECE_SIZE - 4);
+			DrawCanvas.addEntity(d);
+		}
+		
 		ArrayList<Direction> choices = new ArrayList<Direction>();
-		if(board[x-1][y])
-			choices.add(Direction.UP);
-		if(board[x+1][y])
-			choices.add(Direction.DOWN);
 		if(board[x][y-1])
-			choices.add(Direction.LEFT);
+			choices.add(Direction.UP);
 		if(board[x][y+1])
+			choices.add(Direction.DOWN);
+		if(board[x-1][y])
+			choices.add(Direction.LEFT);
+		if(board[x+1][y])
 			choices.add(Direction.RIGHT);
 		return choices;
 			
@@ -85,10 +92,10 @@ public class Board {
 			for (int i = 0; i < arr; i++) {
 				for (int j = 0; j < arrLong; j++) {
 					if (board[i][j]) {
-						Pellet p = new Pellet(j*BOARD_PIECE_SIZE, i*BOARD_PIECE_SIZE, 4);
+						Pellet p = new Pellet(i*BOARD_PIECE_SIZE, j*BOARD_PIECE_SIZE, 4);
 						DrawCanvas.addEntity(p);
 					} else {
-						Wall w = new Wall(j*BOARD_PIECE_SIZE, i*BOARD_PIECE_SIZE, BOARD_PIECE_SIZE);
+						Wall w = new Wall(i*BOARD_PIECE_SIZE, j*BOARD_PIECE_SIZE, BOARD_PIECE_SIZE);
 						DrawCanvas.addEntity(w);
 					}
 				}

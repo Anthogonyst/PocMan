@@ -6,5 +6,6 @@ public enum DrawOptions {
 	PAINT_RED,
 	PAINT_BLUE,
 	PAINT_YELLOW,
-	PAINT_WHITE;
+	PAINT_WHITE,
+	PAINT_PURPLE;
 }

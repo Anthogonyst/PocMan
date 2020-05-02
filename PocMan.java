@@ -30,7 +30,7 @@ public class PocMan extends JFrame implements IApplication {
 		Board board = new Board();
 		user = new Entity();
 		
-		int n = 40;
+		int n = 30;
 		ghosts = new Ghost[n];
 		
 		for (int i = 0; i < n; i++) {
