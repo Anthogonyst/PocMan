@@ -1,4 +1,4 @@
-package Maestus.PocMan;
+//package Maestus.PocMan;
 
 /**
  * Enumerates the different directions that could be taken in (x, y) coordinates

@@ -1,4 +1,4 @@
-package Maestus.PocMan;
+//package Maestus.PocMan;
 
 public enum DrawOptions {
 	SINGLE,

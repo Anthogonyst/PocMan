@@ -1,4 +1,4 @@
-package Maestus.PocMan;
+//package Maestus.PocMan;
 
 public interface IApplication {
 	abstract void nextFrame();

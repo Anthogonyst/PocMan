@@ -1,12 +1,14 @@
-package Maestus.PocMan;
+//package Maestus.PocMan;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Timer;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -22,15 +24,23 @@ public class PocMan extends JFrame implements IApplication {
 	private Entity[] ghosts;
 	private Timer timer;
 	private final DrawCanvas display;
+	private ScoreBoard scoreBoard;
+	private JPanel gameContainer;
 	// private Grid grid;
 
 	public PocMan() {
+		gameContainer = new JPanel();
+		scoreBoard = new ScoreBoard();
 		display = new DrawCanvas();
-
+		
+		gameContainer.setLayout(new BoxLayout(gameContainer, BoxLayout.Y_AXIS));
+		gameContainer.add(scoreBoard);
+		gameContainer.add(display);
+		
 		Board board = new Board();
 		user = new Entity();
 		
-		int n = 30;
+		int n = 5;
 		ghosts = new Ghost[n];
 		
 		for (int i = 0; i < n; i++) {
@@ -41,13 +51,9 @@ public class PocMan extends JFrame implements IApplication {
 		display.addEntity(user);
 		board.initBoard();
 		
-		setSize(800,600);
-		setLocationRelativeTo(null);
-
-
 		addKeyListener(InputManager.newController(user));
 		setFocusable(true);
-		add(display);
+		add(gameContainer);
 		initUI();
 		repaint();
 		
@@ -72,7 +78,7 @@ public class PocMan extends JFrame implements IApplication {
         //setResizable(false);
         pack();
 
-        setSize(800, 600);
+        setSize(900, 900);
         setTitle("Poc Man");
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

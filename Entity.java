@@ -1,4 +1,4 @@
-package Maestus.PocMan;
+//package Maestus.PocMan;
 
 import java.awt.Graphics;
 import java.awt.Image;

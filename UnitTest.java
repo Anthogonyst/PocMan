@@ -1,4 +1,4 @@
-package Maestus.PocMan;
+//package Maestus.PocMan;
 
 import org.junit.Before;
 import org.junit.Ignore;

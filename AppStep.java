@@ -1,6 +1,4 @@
-package Maestus.PocMan;
-
-//please commit
+//package Maestus.PocMan;
 
 /**
  * A time keeping program that maintains a consistent frame rate for the application
