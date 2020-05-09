@@ -19,16 +19,13 @@ public class ScoreBoard extends JPanel {
 		text = new JLabel("Score: ");
 		scoreText = new JLabel(score.toString());
 		
-		text.setFont(new Font("Serif", Font.BOLD, 30));
-		scoreText.setFont(new Font("Serif", Font.BOLD, 30));
-		text.setForeground(Color.white);
-		scoreText.setForeground(Color.white);
+		setFont();
 		
 		add(text);
 		add(scoreText);
 		
 		setBackground(Color.blue);
-		setMaximumSize(new Dimension(1000, 40));
+		setMaximumSize(new Dimension(900, 40));
 	}
 	
 	/**
@@ -40,5 +37,13 @@ public class ScoreBoard extends JPanel {
 	public void addScore(int s) {
 		score += s;
 		scoreText.setText(score.toString());
+	}
+	
+	private void setFont() {
+		Font f = new Font("Serif", Font.BOLD, 30);
+		text.setFont(f);
+		scoreText.setFont(f);
+		text.setForeground(Color.white);
+		scoreText.setForeground(Color.white);
 	}
 }

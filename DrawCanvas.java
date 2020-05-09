@@ -1,6 +1,7 @@
 //package Maestus.PocMan;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
@@ -17,6 +18,7 @@ public class DrawCanvas extends JPanel {
 	
 	DrawCanvas() {
 		entities = new LinkedList<Entity>();
+		setMaximumSize(new Dimension(900, 900));
 	}
 	
 	static boolean addEntity(Entity e) {

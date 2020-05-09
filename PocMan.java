@@ -33,6 +33,7 @@ public class PocMan extends JFrame implements IApplication {
 		scoreBoard = new ScoreBoard();
 		display = new DrawCanvas();
 		
+		gameContainer.setBackground(Color.black);
 		gameContainer.setLayout(new BoxLayout(gameContainer, BoxLayout.Y_AXIS));
 		gameContainer.add(scoreBoard);
 		gameContainer.add(display);
@@ -50,13 +51,12 @@ public class PocMan extends JFrame implements IApplication {
 		
 		display.addEntity(user);
 		board.initBoard();
-		
+				
 		addKeyListener(InputManager.newController(user));
 		setFocusable(true);
 		add(gameContainer);
 		initUI();
 		repaint();
-		
 	}
 	
 	@Override
