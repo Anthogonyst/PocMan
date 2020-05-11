@@ -21,6 +21,12 @@ public class DrawCanvas extends JPanel {
 		setMaximumSize(new Dimension(900, 900));
 	}
 	
+	/**
+	 * Static method to add an entity to the LinkedList
+	 * 
+	 * @param e entity to be added
+	 * @return true if entity was not present added, false if entity was already present
+	 */
 	static boolean addEntity(Entity e) {
 		if (!entities.contains(e)) {
 			entities.add(e);
@@ -30,6 +36,12 @@ public class DrawCanvas extends JPanel {
 		}
 	}
 	
+	/**
+	 * Static method to remove an entity from the LinkedList
+	 * 
+	 * @param e entity to be removed
+	 * @return true if entity was present and removed, flase if entity was not present
+	 */
 	static boolean removeEntity(Entity e) {
 		if (entities.contains(e)) {
 			entities.remove(e);
@@ -40,6 +52,9 @@ public class DrawCanvas extends JPanel {
 		
 	}
 	
+	/**
+	 * Paints a component on the JPanel 
+	 */
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(Color.black);

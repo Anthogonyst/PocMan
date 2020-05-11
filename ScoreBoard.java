@@ -32,13 +32,16 @@ public class ScoreBoard extends JPanel {
 	 * Adds an int value to the score and updates the label holding
 	 * the current score
 	 * 
-	 * @param s amount of points to be added to the scoreboard
+	 * @param s amount of points to be added to the ScoreBoard
 	 */
 	static void addScore(int s) {
 		score = s;
 		scoreText.setText(score.toString());
 	}
 	
+	/**
+	 * Sets font for labels within the ScoreBoard class 
+	 */
 	private void setFont() {
 		Font f = new Font("Serif", Font.BOLD, 30);
 		text.setFont(f);
