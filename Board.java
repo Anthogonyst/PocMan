@@ -84,6 +84,10 @@ public class Board {
 		return new Vector2(gridX, gridY);
 	}
 	
+	/**
+	 * Initializes board and pellet placement using a standard size for board
+	 * pieces.
+	 */
 	public static void initBoard() {
 		int arr = board.length;
 		int arrLong = board[0].length;

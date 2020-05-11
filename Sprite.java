@@ -29,14 +29,29 @@ public class Sprite<T extends Entity> {
 		color = _color;
 	}
 	
+	/**
+	 * Accessor method for visibility of sprite
+	 * 
+	 * @return boolean value of visibility
+	 */
 	public boolean isVisible() {
 		return visible;
 	}
 
+	/**
+	 * Mutator method for visibility of sprite
+	 * 
+	 * @param _visible boolean value to set visibility to
+	 */
 	public void setVisible(boolean _visible) {
 		visible = _visible;
 	}
 	
+	/**
+	 * Paints sprite based on the color of the sprite
+	 * 
+	 * @param g graphic to be painted
+	 */
 	protected void paintComponent(Graphics g) {
 		switch (color) {
 		case SINGLE: return;

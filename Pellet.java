@@ -1,5 +1,9 @@
 //package Maestus.PocMan;
 
+/**
+ * Class for PocMans "food" an entity to be placed across traversable spaces
+ *
+ */
 public class Pellet extends Entity {
 	
 	public Pellet(int _x, int _y, int size) {
