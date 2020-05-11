@@ -22,19 +22,19 @@ public class InputManager {
 				// In the future, we will buffer the action by using a setter method
 				if(keys[KeyEvent.VK_UP])
 				{
-					e.facing = Direction.UP;
+					e.bufferDirection(Direction.UP);
 				}
 				if(keys[KeyEvent.VK_DOWN])
 				{
-					e.facing = Direction.DOWN;
+					e.bufferDirection(Direction.DOWN);
 				}
 				if(keys[KeyEvent.VK_LEFT])
 				{
-					e.facing = Direction.LEFT;
+					e.bufferDirection(Direction.LEFT);
 				}
 				if(keys[KeyEvent.VK_RIGHT])
 				{
-					e.facing = Direction.RIGHT;
+					e.bufferDirection(Direction.RIGHT);
 				}
 
 			}

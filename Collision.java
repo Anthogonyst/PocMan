@@ -4,7 +4,8 @@ enum Collision {
 	WALL,
 	PLAYER,
 	GHOST,
-	PELLET;
+	PELLET,
+	NONE;
 	
 	/* Action? */ int touch(Collision other) {
 		switch (this) {
@@ -17,7 +18,7 @@ enum Collision {
 	}
 	
 	private static int touching(Collision _this, Collision other) {
-		switch (_this) {
+		switch (other) {
 		case WALL: return 1; // something touched a wall, turn _this away please
 		case PLAYER: return 2; // a ghost touched a player, start game over or get eaten; may break with multiplayer
 		case GHOST: return -1; // ignore this

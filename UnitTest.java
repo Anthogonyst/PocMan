@@ -58,4 +58,34 @@ public class UnitTest {
     	Entity three = new Entity(8, 4, 0);
     	assertFalse(three.box.getBounds().intersects(two.box.getBounds()));
     }
+    
+    @Test
+    public void isAtIntersection() {
+    	Player one = new Player(30, 30, 0);
+    	Pellet two = new Pellet(30, 30, 4);
+    	assertTrue(one.box.getBounds().equals(two.box.getBounds()));
+    }
+
+    @Test
+    public void isAtIntersection2() {
+    	Player one = new Player(60, 60, 0);
+    	Pellet two = new Pellet(60, 60, 4);
+    	int state = one.box.colliding(two);
+    	assertTrue(state == 4);
+    }
+    
+    @Test
+    public void stopAtWall() {
+    	Board b = new Board();
+    	Player no = new Player(100, 100, 3);
+    	Pellet u = new Pellet(100, 100, 4);
+    	no.facing = Direction.UP;
+    	no.bufferDirection(Direction.UP);
+    	no.move();
+    	no.move();
+    	no.move();
+
+    	System.out.println(no.x);
+    	assertTrue(no.velocity == 0);
+    }
 }

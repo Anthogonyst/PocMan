@@ -29,6 +29,14 @@ public class Sprite<T extends Entity> {
 		color = _color;
 	}
 	
+	public Sprite(T _parent, int _width, int _height, DrawOptions _color) {
+		parent = _parent;
+		width = _width;
+		height = _height;
+		visible = true;
+		color = _color;
+	}
+	
 	public boolean isVisible() {
 		return visible;
 	}

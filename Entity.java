@@ -18,22 +18,12 @@ public class Entity {
 	Collider box;
 	Sprite sprite;
 	
-	public Entity() {
-		x = 180;
-		y = 180;
-		speed = 3;
-		velocity = 3;
-		facing = Direction.RIGHT;
-		box = new Collider<Entity>(this, Collision.GHOST, 4);
-		sprite = new Sprite<Entity>(this, Board.BOARD_PIECE_SIZE, DrawOptions.PAINT_RED);
-	}
-	
 	public Entity(int _x, int _y, int _speed) {
 		x = _x;
 		y = _y;
-		facing = Direction.UP;
 		speed = _speed;
 		velocity = 0;
+		facing = Direction.UP;
 		box = new Collider<Entity>(this, Collision.GHOST, 4);
 		sprite = new Sprite<Entity>(this, Board.BOARD_PIECE_SIZE, DrawOptions.PAINT_RED);
 	}
@@ -46,11 +36,27 @@ public class Entity {
 		x += facing.x * velocity;
 		y += facing.y * velocity;
 	}
+
+	boolean outofBounds(int dx, int dy) {
+		if (x + dx >= 15 || y + dy >= 15 || x + dx <= 905 || y + dy <= 905)
+			return false;
+		
+		if (x + dx < 15)
+			x = 890;
+			
+		if (y + dy < 15)
+			y = 890;
+			
+		if (x + dx > 905)
+			x = 30;
+		
+		if (y + dy > 905)
+			y = 30;
+		
+		return true;
+	}
 	
-	void bufferDirection() {
-		// Timer t = 10 milliseconds
-		// If an intersection is reached, the direction facing is set to direction buffer
-		// At the end of 10 milliseconds, the direction buffer is set to the direction facingW
+	void bufferDirection(Direction dir) {
 	}
 	
 	void updateSpeed() {
@@ -61,6 +67,7 @@ public class Entity {
 		return false;
 		// check the collisions here
 	}
+	
 	
 	protected void paintComponent(Graphics g) {
 		

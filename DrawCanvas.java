@@ -46,7 +46,9 @@ public class DrawCanvas extends JPanel {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
 		for (Entity e : entities) {
-			e.sprite.paintComponent(g);
+			if (e.sprite.isVisible()) {
+				e.sprite.paintComponent(g);
+			}
 		}
 	}
 }

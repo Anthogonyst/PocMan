@@ -88,25 +88,6 @@ public class Ghost extends Entity {
 		} else return facing;
 	}
 	
-	private boolean outofBounds(int dx, int dy) {
-		if (x + dx >= 15 || y + dy >= 15 || x + dx <= 905 || y + dy <= 905)
-			return false;
-		
-		if (x + dx < 15)
-			x = 890;
-			
-		if (y + dy < 15)
-			y = 890;
-			
-		if (x + dx > 905)
-			x = 30;
-		
-		if (y + dy > 905)
-			y = 30;
-		
-		return true;
-	}
-	
 	public String printIsADebugFeatureISwear() {
 		String s = toString() + "\tPos:  \t" + x + "," + y + "\t\tAxis: \t" + axisX + "," + axisY + "\tLerp: \t" + lerpX + "," + lerpY + "\tDir:\t" + facing;
 		return s;

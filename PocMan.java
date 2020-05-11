@@ -39,9 +39,9 @@ public class PocMan extends JFrame implements IApplication {
 		gameContainer.add(display);
 		
 		Board board = new Board();
-		user = new Entity();
+		user = new Player(500, 500, 3);
 		
-		int n = 5;
+		int n = 0;
 		ghosts = new Ghost[n];
 		
 		for (int i = 0; i < n; i++) {
@@ -71,7 +71,7 @@ public class PocMan extends JFrame implements IApplication {
 	
 	@Override
 	public void updateUI() {
-		;
+		//ScoreBoard.repaint();
 	}
 	
     private void initUI() {

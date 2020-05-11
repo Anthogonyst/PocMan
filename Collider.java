@@ -18,4 +18,12 @@ public class Collider<T extends Entity> {
     public Rectangle getBounds() {
         return new Rectangle(parent.x - width/2, parent.y - height/2, width, height);
     }
+    
+    public int colliding(Entity other) {
+    	if (this.getBounds().intersects(other.box.getBounds()))
+    		return layer.touch(other.box.layer);
+    	else {
+    		return -1;
+    	}
+    }
 }

@@ -11,9 +11,9 @@ import javax.swing.JPanel;
  *
  */
 public class ScoreBoard extends JPanel {
-	private Integer score = 0;
-	private JLabel text; 
-	private JLabel scoreText;
+	private static Integer score = 0;
+	private static JLabel text; 
+	private static JLabel scoreText;
 	
 	public ScoreBoard() {
 		text = new JLabel("Score: ");
@@ -34,8 +34,8 @@ public class ScoreBoard extends JPanel {
 	 * 
 	 * @param s amount of points to be added to the scoreboard
 	 */
-	public void addScore(int s) {
-		score += s;
+	static void addScore(int s) {
+		score = s;
 		scoreText.setText(score.toString());
 	}
 	
