@@ -10,7 +10,7 @@ import java.util.HashMap;
  */
 public class Board {
 	
-	static int BOARD_PIECE_SIZE = 30;
+	static int BOARD_PIECE_SIZE = 26;
 	static boolean initDone = false;
 	private static HashMap<Vector2, Entity> boardEntities;
 	private static int totalPellets;
@@ -50,6 +50,10 @@ public class Board {
 			{false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false},
 			{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}
 		};
+	
+	static int BOARD_HEIGHT = BOARD_PIECE_SIZE*board[0].length;
+	static int BOARD_WIDTH = BOARD_PIECE_SIZE*board.length;
+	
 	
 	public Board() {
 		boardEntities = new HashMap<Vector2, Entity>();

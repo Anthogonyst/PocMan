@@ -14,8 +14,8 @@ import javax.swing.JPanel;
  *
  */
 public class TopPanel extends JPanel {
-	public ScoreBoard sb;
-	public HighScore hs;
+	private ScoreBoard sb;
+	private HighScore hs;
 	
 	public TopPanel() {
 		sb = new ScoreBoard();
@@ -28,6 +28,6 @@ public class TopPanel extends JPanel {
 		//add(Box.createRigidArea(new Dimension(300, 60)));
 		
 		setBackground(Color.black);
-		setMaximumSize(new Dimension(900, 60));
-	}
+		setMaximumSize(new Dimension(Board.BOARD_WIDTH, 60));
+	}	
 }

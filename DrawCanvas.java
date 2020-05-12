@@ -18,7 +18,7 @@ public class DrawCanvas extends JPanel {
 	
 	DrawCanvas() {
 		entities = new LinkedList<Entity>();
-		setMaximumSize(new Dimension(900, 930));
+		setMaximumSize(new Dimension(Board.BOARD_WIDTH, Board.BOARD_HEIGHT));
 	}
 	
 	/**

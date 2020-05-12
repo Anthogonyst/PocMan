@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -6,7 +5,6 @@ import java.awt.Font;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 /** 
  * Class that instantiates a ScoreBoard for PocMan and supports
@@ -18,12 +16,13 @@ public class ScoreBoard extends JPanel {
 	private static Integer score = 0, level = 1; //prefer to get level from somewhere else
 	private static JLabel scoreText;
 	private static JLabel oneUP;
+	private Dimension dim = new Dimension(Board.BOARD_WIDTH/3,30);
 	
 	public ScoreBoard() {
 		scoreText = new JLabel(score.toString(), JLabel.CENTER);
-		scoreText.setMaximumSize(new Dimension(300, 30));
+		scoreText.setMaximumSize(dim);
 		oneUP = new JLabel((level.toString() + "UP"), JLabel.CENTER);
-		oneUP.setMaximumSize(new Dimension(300, 30));
+		oneUP.setMaximumSize(dim);
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
@@ -35,7 +34,7 @@ public class ScoreBoard extends JPanel {
 		setAlignmentX(CENTER_ALIGNMENT);
 		
 		setBackground(Color.black);
-		setMaximumSize(new Dimension(300, 60));
+		setMaximumSize(new Dimension(Board.BOARD_WIDTH/3, 60));
 	}
 	
 	/**

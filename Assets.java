@@ -1,15 +1,18 @@
 import java.awt.image.BufferedImage;
 
+import javax.swing.ImageIcon;
+
 // holds the crop image of spritesheet
 public class Assets {
+	public static SpriteSheet sheet = new SpriteSheet();
     
+	public static ImageIcon mediumPocMan = new ImageIcon(sheet.crop(111, 53, 27, 30));
+	
     private static final int width = 30, height = 30;
-
+    
     public static BufferedImage pocman, ghost, pellet, superPellet, fruit, board;
     
     public static void init(){
-        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/pacSheet.png"));
-
         pocman = sheet.crop(-109, -53, width, height);
         ghost = sheet.crop(-166, -53, width, height);
         fruit = sheet.crop(-8,-12,12,12);

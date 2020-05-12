@@ -1,11 +1,19 @@
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class SpriteSheet {
     
-    private BufferedImage sheet;
+    public static BufferedImage sheet;
 
-    public SpriteSheet(BufferedImage sheet){
-        this.sheet = sheet;
+    public SpriteSheet(){
+        try{
+        	sheet = ImageIO.read(this.getClass().getResource("pacSheet.png"));;
+        } catch(IOException e) {
+			e.printStackTrace();
+			System.exit(0);
+		}
     }
 
     

@@ -17,12 +17,13 @@ public class HighScore extends JPanel {
 	public static Integer highScore = 3333360; //temporary high score, will most likely be read from file
 	private static JLabel scoreText;
 	private static JLabel text;
+	private Dimension dim = new Dimension(Board.BOARD_WIDTH/3,30);
 	
 	public HighScore() {
 		text = new JLabel("High Score", JLabel.CENTER);
-		text.setMaximumSize(new Dimension(300, 30));
+		text.setMaximumSize(dim);
 		scoreText = new JLabel(highScore.toString(), JLabel.CENTER); //parse file for high score and add to JLabel
-		scoreText.setMaximumSize(new Dimension(300, 30));
+		scoreText.setMaximumSize(dim);
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
@@ -34,7 +35,7 @@ public class HighScore extends JPanel {
 		setAlignmentX(CENTER_ALIGNMENT);
 		
 		setBackground(Color.black);
-		setMaximumSize(new Dimension(300, 60));
+		setMaximumSize(new Dimension(Board.BOARD_WIDTH/3, 60));
 	}
 	
 	/**

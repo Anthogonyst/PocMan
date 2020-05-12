@@ -26,6 +26,7 @@ public class PocMan extends JFrame implements IApplication {
 	private final DrawCanvas display;
 	private TopPanel topPanel;
 	private JPanel gameContainer;
+	private BottomPanel bottomPanel;
 	// private Grid grid;
 	private boolean isPaused = true;
 
@@ -33,11 +34,13 @@ public class PocMan extends JFrame implements IApplication {
 		gameContainer = new JPanel();
 		topPanel = new TopPanel();
 		display = new DrawCanvas();
+		bottomPanel = new BottomPanel();
 		
 		gameContainer.setBackground(Color.black);
 		gameContainer.setLayout(new BoxLayout(gameContainer, BoxLayout.Y_AXIS));
 		gameContainer.add(topPanel);
 		gameContainer.add(display);
+		gameContainer.add(bottomPanel);
 		
 		Board board = new Board();
 		user = new Player(500, 500, 3);
