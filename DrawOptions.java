@@ -1,5 +1,10 @@
 //package Maestus.PocMan;
 
+/**
+ * 
+ * @author Oracle
+ *
+ */
 public enum DrawOptions {
 	SINGLE,
 	MULTI,

@@ -1,5 +1,10 @@
 //package Maestus.PocMan;
 
+/**
+ * 
+ * @author Oracle
+ *
+ */
 public class DebugSquare extends Entity {
 
 	public DebugSquare(int _x, int _y, int size) {

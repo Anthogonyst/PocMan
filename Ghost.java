@@ -2,6 +2,11 @@
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author Oracle
+ *
+ */
 public class Ghost extends Entity {
 	
 	private int axisX;

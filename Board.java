@@ -3,6 +3,11 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * 
+ * @author Oracle, Vincent Ndokaj
+ *
+ */
 public class Board {
 	
 	static int BOARD_PIECE_SIZE = 30;
@@ -52,6 +57,10 @@ public class Board {
 		remainingPellets = 0;
 	}
 
+	/**
+	 * Initializes board and pellet placement using a standard size for board
+	 * pieces.
+	 */
 	static void initBoard() {
 		int arr = board.length;
 		int arrLong = board[0].length;
@@ -133,29 +142,6 @@ public class Board {
 	
 	static Entity queryEntity(int x, int y) {
 		return boardEntities.get(new Vector2(x, y));
-	}
-	
-	/**
-	 * Initializes board and pellet placement using a standard size for board
-	 * pieces.
-	 */
-	public static void initBoard() {
-		int arr = board.length;
-		int arrLong = board[0].length;
-		
-		if (!initDone) {
-			for (int i = 0; i < arr; i++) {
-				for (int j = 0; j < arrLong; j++) {
-					if (board[i][j]) {
-						Pellet p = new Pellet(i*BOARD_PIECE_SIZE, j*BOARD_PIECE_SIZE, 4);
-						DrawCanvas.addEntity(p);
-					} else {
-						Wall w = new Wall(i*BOARD_PIECE_SIZE, j*BOARD_PIECE_SIZE, BOARD_PIECE_SIZE);
-						DrawCanvas.addEntity(w);
-					}
-				}
-			}
-		}
 	}
 	
 	/**Takes in coordinates and checks whether or not it is a valid path

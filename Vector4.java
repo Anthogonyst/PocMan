@@ -1,4 +1,9 @@
 
+/**
+ * 
+ * @author Oracle
+ *
+ */
 public class Vector4 {
 	final int x;
 	final int y;

@@ -1,5 +1,12 @@
 import java.util.ArrayList;
 
+/**
+ * Handles the draw call for a specific board setup
+ * Optimizes the poly count
+ * Is hardcoded
+ * @author Oracle
+ *
+ */
 public final class BoardWalls {
 
 	final static ArrayList<Vector4> optimalBorders(int m, int n) {

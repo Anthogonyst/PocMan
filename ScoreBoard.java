@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 /** 
  * Class that instantiates a scoreboard for PocMan and supports
  * updating score with a method call.
+ * @author Vincent Ndokaj
  *
  */
 public class ScoreBoard extends JPanel {

@@ -1,5 +1,10 @@
 //package Maestus.PocMan;
 
+/**
+ * 
+ * @author Oracle
+ *
+ */
 public class Vector2 {
 	final int x;
 	final int y;

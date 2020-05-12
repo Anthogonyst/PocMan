@@ -2,6 +2,12 @@
 
 import java.awt.Rectangle;
 
+/**
+ * 
+ * @author Oracle
+ *
+ * @param <T>
+ */
 public class Collider<T extends Entity> {
     private final int width;
     private final int height;

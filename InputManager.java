@@ -9,7 +9,20 @@ import java.awt.event.KeyEvent;
  *
  */
 public class InputManager {
+	
+	private static InputManager single_instance = null;
+	
+	private InputManager() {
+	}
 
+	// static method to create instance of Singleton class 
+	public static InputManager getInstance() {
+		if (single_instance == null)
+			single_instance = new InputManager();
+		
+		return single_instance;
+	}
+	
 	static KeyAdapter newController(Entity e) {
 		
 		return new KeyAdapter() {
