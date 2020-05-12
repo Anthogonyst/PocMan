@@ -16,7 +16,7 @@ public class Sprite<T extends Entity> {
 	private final int height;
 	private final T parent;
 	
-	private DrawOptions color;
+	//private DrawOptions color;
 	private boolean visible;
 	
 	public Sprite(T _parent, int size) {
@@ -24,7 +24,8 @@ public class Sprite<T extends Entity> {
 		width = size;
 		height = size;
 		visible = true;
-		color = DrawOptions.PAINT_RED;
+		
+		//color = DrawOptions.PAINT_RED; can delete if we get image buffering to work
 	}
 
 	public Sprite(T _parent, int size, DrawOptions _color) {
@@ -66,7 +67,7 @@ public class Sprite<T extends Entity> {
 	 * 
 	 * @param g graphic to be painted
 	 */
-	protected void paintComponent(Graphics g) {
+	/*protected void paintComponent(Graphics g) { can delete if we get image buffereing to work
 		switch (color) {
 		case SINGLE: return;
 		case MULTI: return;
@@ -77,5 +78,5 @@ public class Sprite<T extends Entity> {
 		case PAINT_PURPLE: Color purpleish = new Color(255, 0, 255, 127); g.setColor(purpleish); g.fillRect(parent.x - width/2, parent.y - height/2, width, height); return;
 		default: g.setColor(Color.RED); g.fillRect(parent.x - width/2, parent.y - height/2, width, height); return;
 		}
-	}
+	}*/
 }
