@@ -4,7 +4,7 @@ public class SpriteSheet {
     
     private BufferedImage sheet;
 
-    public SpriteSheet(bufferedImage sheet){
+    public SpriteSheet(BufferedImage sheet){
         this.sheet = sheet;
     }
 
@@ -16,7 +16,7 @@ public class SpriteSheet {
      * @param h height
      * @return bufferedImage
      */
-    public bufferedImage crop(int x, int y, int w, int h){
+    public BufferedImage crop(int x, int y, int w, int h){
         return sheet.getSubimage(x, y, w, h);
     }
 }

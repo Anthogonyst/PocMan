@@ -1,3 +1,5 @@
+import java.awt.image.BufferedImage;
+
 // holds the crop image of spritesheet
 public class Assets {
     
@@ -6,7 +8,7 @@ public class Assets {
     public static BufferedImage pocman, ghost, pellet, superPellet, fruit, board;
     
     public static void init(){
-        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/pacSheet.png"))
+        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/pacSheet.png"));
 
         pocman = sheet.crop(-109, -53, width, height);
         ghost = sheet.crop(-166, -53, width, height);
