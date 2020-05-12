@@ -20,8 +20,8 @@ public class LifePanel extends JPanel {
 	private static boolean first = true;
 	
 	public LifePanel(){		
-		life = new JLabel(Assets.mediumPocMan);
-		life2 = new JLabel(Assets.mediumPocMan);
+		life = new JLabel(Assets.medPocMan2);
+		life2 = new JLabel(Assets.medPocMan2);
 		life.setMaximumSize(dim);
 		life2.setMaximumSize(dim);
 		
