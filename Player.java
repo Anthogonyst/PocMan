@@ -1,5 +1,10 @@
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author Oracle
+ *
+ */
 public class Player extends Entity {
 
 	private int axisX;

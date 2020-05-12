@@ -1,5 +1,10 @@
 //package Maestus.PocMan;
 
+/**
+ * 
+ * @author Oracle
+ *
+ */
 public class Wall extends Entity {
 	
 	Collider bigBox;

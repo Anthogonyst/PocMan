@@ -1,5 +1,10 @@
 //package Maestus.PocMan;
 
+/**
+ * 
+ * @author Oracle
+ *
+ */
 enum Collision {
 	WALL,
 	PLAYER,

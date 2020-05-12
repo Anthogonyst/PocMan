@@ -1,4 +1,9 @@
 
+/**
+ * 
+ * @author Oracle
+ *
+ */
 public class Plane extends Entity {
 	public Plane(int x, int y, int length, int width) {
 		super(x, y, 0);

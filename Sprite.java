@@ -5,6 +5,12 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 
+/**
+ * 
+ * @author Oracle
+ *
+ * @param <T>
+ */
 public class Sprite<T extends Entity> {
 	private final int width;
 	private final int height;

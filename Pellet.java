@@ -2,6 +2,7 @@
 
 /**
  * Class for PocMans "food" an entity to be placed across traversable spaces
+ * @author Oracle
  *
  */
 public class Pellet extends Entity {

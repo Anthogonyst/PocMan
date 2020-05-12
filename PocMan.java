@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 /**
  * An application that will hopefully play Poc Man
  * 
- * @author Oracle
+ * @author Oracle, Vincent Ndokaj
  *
  */
 public class PocMan extends JFrame implements IApplication {
@@ -27,6 +27,7 @@ public class PocMan extends JFrame implements IApplication {
 	private ScoreBoard scoreBoard;
 	private JPanel gameContainer;
 	// private Grid grid;
+	private boolean isPaused = true;
 
 	public PocMan() {
 		gameContainer = new JPanel();
@@ -53,18 +54,23 @@ public class PocMan extends JFrame implements IApplication {
 		board.initBoard();
 				
 		addKeyListener(InputManager.newController(user));
+		addKeyListener(PauseManager.newPauseController(this));
+		
 		setFocusable(true);
 		add(gameContainer);
 		initUI();
 		repaint();
+		togglePause();
 	}
 	
 	@Override
 	public void nextFrame() {
-		user.move();
+		if (!isPaused) {
+			user.move();
 		
-		for (Entity g : ghosts) {
-			g.move();
+			for (Entity g : ghosts) {
+				g.move();
+			}
 		}
 		repaint();
 	}
@@ -72,6 +78,11 @@ public class PocMan extends JFrame implements IApplication {
 	@Override
 	public void updateUI() {
 		//ScoreBoard.repaint();
+	}
+	
+	@Override
+	public void togglePause() {
+		isPaused = !isPaused;
 	}
 	
     private void initUI() {
