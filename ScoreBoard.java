@@ -1,43 +1,55 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /** 
- * Class that instantiates a scoreboard for PocMan and supports
+ * Class that instantiates a ScoreBoard for PocMan and supports
  * updating score with a method call.
  * @author Vincent Ndokaj
  *
  */
 public class ScoreBoard extends JPanel {
-	private static Integer score = 0;
-	private static JLabel text; 
+	private static Integer score = 0, level = 1; //prefer to get level from somewhere else
 	private static JLabel scoreText;
+	private static JLabel oneUP;
 	
 	public ScoreBoard() {
-		text = new JLabel("Score: ");
-		scoreText = new JLabel(score.toString());
+		scoreText = new JLabel(score.toString(), JLabel.CENTER);
+		scoreText.setMaximumSize(new Dimension(300, 30));
+		oneUP = new JLabel((level.toString() + "UP"), JLabel.CENTER);
+		oneUP.setMaximumSize(new Dimension(300, 30));
+		
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		setFont();
 		
-		add(text);
+		add(oneUP);
 		add(scoreText);
 		
-		setBackground(Color.blue);
-		setMaximumSize(new Dimension(900, 40));
+		setAlignmentX(CENTER_ALIGNMENT);
+		
+		setBackground(Color.black);
+		setMaximumSize(new Dimension(300, 60));
 	}
 	
 	/**
 	 * Adds an int value to the score and updates the label holding
-	 * the current score
+	 * the current score. If higher than highScore also updates highScore
 	 * 
 	 * @param s amount of points to be added to the ScoreBoard
 	 */
-	static void addScore(int s) {
+	public static void addScore(int s) {
 		score = s;
 		scoreText.setText(score.toString());
+		if(score > HighScore.highScore) {
+			HighScore.updateHighScore(score);
+		}
 	}
 	
 	/**
@@ -45,9 +57,9 @@ public class ScoreBoard extends JPanel {
 	 */
 	private void setFont() {
 		Font f = new Font("Serif", Font.BOLD, 30);
-		text.setFont(f);
+		oneUP.setFont(f);
+		oneUP.setForeground(Color.white);
 		scoreText.setFont(f);
-		text.setForeground(Color.white);
 		scoreText.setForeground(Color.white);
 	}
 }

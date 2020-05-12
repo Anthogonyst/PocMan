@@ -18,7 +18,7 @@ public class DrawCanvas extends JPanel {
 	
 	DrawCanvas() {
 		entities = new LinkedList<Entity>();
-		setMaximumSize(new Dimension(900, 900));
+		setMaximumSize(new Dimension(900, 930));
 	}
 	
 	/**
@@ -40,7 +40,7 @@ public class DrawCanvas extends JPanel {
 	 * Static method to remove an entity from the LinkedList
 	 * 
 	 * @param e entity to be removed
-	 * @return true if entity was present and removed, flase if entity was not present
+	 * @return true if entity was present and removed, false if entity was not present
 	 */
 	static boolean removeEntity(Entity e) {
 		if (entities.contains(e)) {

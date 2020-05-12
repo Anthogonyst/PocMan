@@ -24,19 +24,19 @@ public class PocMan extends JFrame implements IApplication {
 	private Entity[] ghosts;
 	private Timer timer;
 	private final DrawCanvas display;
-	private ScoreBoard scoreBoard;
+	private TopPanel topPanel;
 	private JPanel gameContainer;
 	// private Grid grid;
 	private boolean isPaused = true;
 
 	public PocMan() {
 		gameContainer = new JPanel();
-		scoreBoard = new ScoreBoard();
+		topPanel = new TopPanel();
 		display = new DrawCanvas();
 		
 		gameContainer.setBackground(Color.black);
 		gameContainer.setLayout(new BoxLayout(gameContainer, BoxLayout.Y_AXIS));
-		gameContainer.add(scoreBoard);
+		gameContainer.add(topPanel);
 		gameContainer.add(display);
 		
 		Board board = new Board();
