@@ -7,7 +7,7 @@
  *
  * @param <T> of <code>IApplication</code>
  */
-public class AppStep<T extends IApplication> {
+public final class AppStep<T extends IApplication> {
 	
 	private final T app;
 	

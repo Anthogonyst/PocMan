@@ -9,10 +9,16 @@ import java.util.ArrayList;
  */
 public final class BoardWalls {
 
+	/**
+	 * Returns the optimized board walls
+	 * @param height
+	 * @param width
+	 * @return board walls
+	 */
 	final static ArrayList<Vector4> optimalBorders(int m, int n) {
 		ArrayList<Vector4> draw = new ArrayList<Vector4>();
 		
-		draw.add(new Vector4(0, 0, m, 0));
+		draw.add(new Vector4(0, 0, m-1, 0));
 		draw.add(new Vector4(0, 1, 0, n-2));
 		draw.add(new Vector4(0, n-1, m-1, n-1));
 		draw.add(new Vector4(m-1, 1, m-1, n-2));

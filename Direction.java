@@ -25,8 +25,8 @@ public enum Direction {
 	/**
 	 * Method that returns the opposite of the Direction passed in.
 	 * 
-	 * @param dir a Direction
-	 * @return the opposite of the Direction passed in
+	 * @param direction
+	 * @return the opposite direction
 	 */
 	public static Direction backwards(Direction dir) {
 		switch(dir) {
@@ -44,17 +44,15 @@ public enum Direction {
 	/**
 	 * Method to return a vector based on direction and magnitude wanted
 	 * 
-	 * @param dir direction vector should face
-	 * @param magnitude length of vector wanted
+	 * @param direction vector
+	 * @param magnitude aka length of vector
 	 * @return
 	 */
 	public static Vector2 drawVector(Direction dir, int magnitude) {
 		return new Vector2(dir.x * magnitude, dir.y * magnitude);
 	}
 
-	/**
-	 * toString override for Direction
-	 */
+	@Override
 	public String toString() {
 		switch(this) {
 		case UP: return "DOWN";

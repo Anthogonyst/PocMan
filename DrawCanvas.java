@@ -13,12 +13,25 @@ import javax.swing.JPanel;
  *
  */
 public class DrawCanvas extends JPanel {
+
+	private static final long serialVersionUID = GameManager.gameVersion;
+	private static DrawCanvas single_instance = null;
+	private static LinkedList<Entity> entities;
 	
-	static LinkedList<Entity> entities;
-	
-	DrawCanvas() {
+	private DrawCanvas() {
 		entities = new LinkedList<Entity>();
 		setMaximumSize(new Dimension(Board.BOARD_WIDTH, Board.BOARD_HEIGHT));
+	}
+
+	/**
+	 * Static method to create instance of Singleton class 
+	 * @return instance
+	 */
+	public static DrawCanvas getInstance() {
+		if (single_instance == null)
+			single_instance = new DrawCanvas();
+		
+		return single_instance;
 	}
 	
 	/**

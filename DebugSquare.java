@@ -1,6 +1,7 @@
 //package Maestus.PocMan;
 
 /**
+ * Visual debug tool
  * 
  * @author Oracle
  *

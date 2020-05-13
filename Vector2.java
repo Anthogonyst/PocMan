@@ -1,14 +1,20 @@
 //package Maestus.PocMan;
 
 /**
+ * An immutable two int value vector
+ * Its values are (x, y)
  * 
  * @author Oracle
- *
  */
 public class Vector2 {
 	final int x;
 	final int y;
 	
+	/**
+	 * Constructs a new immutable vector of two length
+	 * @param _x
+	 * @param _y
+	 */
 	public Vector2(int _x, int _y) {
 		x = _x;
 		y = _y;

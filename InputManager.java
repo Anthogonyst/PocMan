@@ -15,7 +15,10 @@ public class InputManager {
 	private InputManager() {
 	}
 
-	// static method to create instance of Singleton class 
+	/**
+	 * Static method to create instance of <code>InputManager</code> class 
+	 * @return instance
+	 */
 	public static InputManager getInstance() {
 		if (single_instance == null)
 			single_instance = new InputManager();
@@ -23,6 +26,12 @@ public class InputManager {
 		return single_instance;
 	}
 	
+	/**
+	 * Binds the keyboard keys UP, DOWN, LEFT, RIGHT
+	 * Inputs will buffer an input on an <code>Entity</code> such as <code>Player</code> class
+	 * @param <code>Entity</code>
+	 * @return <code>KeyAdapter</code>
+	 */
 	static KeyAdapter newController(Entity e) {
 		
 		return new KeyAdapter() {

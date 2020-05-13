@@ -18,23 +18,29 @@ import javax.swing.JPanel;
  * @author Oracle, Vincent Ndokaj
  *
  */
-public class PocMan extends JFrame implements IApplication {
+public final class PocMan extends JFrame implements IApplication {
 
+	private static final long serialVersionUID = 1;
 	private Entity user;
 	private Entity[] ghosts;
-	private Timer timer;
 	private final DrawCanvas display;
 	private TopPanel topPanel;
 	private JPanel gameContainer;
 	private BottomPanel bottomPanel;
-	// private Grid grid;
+	private GameManager gameState;
 	private boolean isPaused = true;
 
+	/**
+	 * Starts constructing game assets
+	 */
 	public PocMan() {
 		gameContainer = new JPanel();
 		topPanel = new TopPanel();
-		display = new DrawCanvas();
 		bottomPanel = new BottomPanel();
+		display = DrawCanvas.getInstance();
+		gameState = GameManager.getInstance();
+		GameManager.bind(this);
+		
 		
 		gameContainer.setBackground(Color.black);
 		gameContainer.setLayout(new BoxLayout(gameContainer, BoxLayout.Y_AXIS));
@@ -42,19 +48,18 @@ public class PocMan extends JFrame implements IApplication {
 		gameContainer.add(display);
 		gameContainer.add(bottomPanel);
 		
-		Board board = new Board();
-		user = new Player(520, 500, 4);
+		user = new Player(Board.BOARD_PIECE_SIZE*11, Board.BOARD_PIECE_SIZE*12, 4);
 		
-		int n = 4;
+		int n = 1;
 		ghosts = new Ghost[n];
 		
 		for (int i = 0; i < n; i++) {
-			ghosts[i] = new Ghost(180, 155, 3, user);
-			display.addEntity(ghosts[i]);
+			ghosts[i] = new Ghost(Board.BOARD_PIECE_SIZE*5, Board.BOARD_PIECE_SIZE*6, 3, user);
+			DrawCanvas.addEntity(ghosts[i]);
 		}
 		
-		display.addEntity(user);
-		board.initBoard();
+		DrawCanvas.addEntity(user);
+		Board.initBoard();
 				
 		addKeyListener(InputManager.newController(user));
 		addKeyListener(PauseManager.newPauseController(this));
@@ -66,6 +71,9 @@ public class PocMan extends JFrame implements IApplication {
 		togglePause();
 	}
 	
+	/**
+	 * Update frame
+	 */
 	@Override
 	public void nextFrame() {
 		if (!isPaused) {
@@ -78,16 +86,25 @@ public class PocMan extends JFrame implements IApplication {
 		repaint();
 	}
 	
+	/**
+	 * Unfixed update
+	 */
 	@Override
 	public void updateUI() {
 		//ScoreBoard.repaint();
 	}
 	
+	/**
+	 * Toggle pause
+	 */
 	@Override
 	public void togglePause() {
 		isPaused = !isPaused;
 	}
 	
+	/**
+	 * Initializes the game window
+	 */
     private void initUI() {
         //setResizable(false);
         pack();
