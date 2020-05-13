@@ -28,6 +28,7 @@ public class Ghost extends Entity {
 		axisX = pos.x;
 		axisY = pos.y;
 		velocity = speed;
+		box = new Collider<Entity>(this, Collision.GHOST, Board.BOARD_PIECE_SIZE);
 		sprite = new Sprite<Entity>(this, Board.BOARD_PIECE_SIZE, DrawOptions.PAINT_WHITE);
 	}
 	
@@ -56,7 +57,7 @@ public class Ghost extends Entity {
 			axisY = pos.y;
 			
 			lerpX = Math.abs(lerpX % Board.BOARD_PIECE_SIZE);
-			lerpY = Math.abs(lerpX % Board.BOARD_PIECE_SIZE);
+			lerpY = Math.abs(lerpY % Board.BOARD_PIECE_SIZE);
 			
 			Direction oldDirection = facing;
 			ArrayList<Direction> dirs = Board.queryChoices(axisX, axisY);

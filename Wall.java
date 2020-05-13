@@ -11,7 +11,7 @@ public class Wall extends Entity {
 	
 	public Wall(int _x, int _y, int size) {
 		super(_x, _y, 0);
-		bigBox = new Collider<Entity>(this, Collision.WALL, size);
+		box = new Collider<Entity>(this, Collision.WALL, size);
 		sprite = new Sprite<Entity>(this, Board.BOARD_PIECE_SIZE, DrawOptions.PAINT_BLUE);
 	}
 	

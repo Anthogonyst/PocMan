@@ -22,7 +22,7 @@ public class Collider<T extends Entity> {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(parent.x - width/2, parent.y - height/2, width, height);
+        return new Rectangle(parent.x - width/2, parent.y - height/2, width/2, height/2);
     }
     
     public int colliding(Entity other) {

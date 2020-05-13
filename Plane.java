@@ -9,4 +9,6 @@ public class Plane extends Entity {
 		super(x, y, 0);
 		sprite = new Sprite<Entity>(this, length, width, DrawOptions.PAINT_BLUE);
 	}
+	
+	public void move() {}
 }

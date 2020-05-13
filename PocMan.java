@@ -43,13 +43,13 @@ public class PocMan extends JFrame implements IApplication {
 		gameContainer.add(bottomPanel);
 		
 		Board board = new Board();
-		user = new Player(500, 500, 3);
+		user = new Player(520, 500, 4);
 		
-		int n = 0;
+		int n = 4;
 		ghosts = new Ghost[n];
 		
 		for (int i = 0; i < n; i++) {
-			ghosts[i] = new Ghost(180, 180, 3, user);
+			ghosts[i] = new Ghost(180, 155, 3, user);
 			display.addEntity(ghosts[i]);
 		}
 		

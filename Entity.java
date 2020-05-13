@@ -9,7 +9,7 @@ import java.awt.Rectangle;
  * @author Oracle
  *
  */
-public class Entity {
+public abstract class Entity {
 	int x = 150;
 	int y = 150;
 	int speed ;
@@ -24,18 +24,9 @@ public class Entity {
 		speed = _speed;
 		velocity = 0;
 		facing = Direction.UP;
-		box = new Collider<Entity>(this, Collision.GHOST, 4);
-		sprite = new Sprite<Entity>(this, Board.BOARD_PIECE_SIZE, DrawOptions.PAINT_RED);
 	}
 	
-	void move() {
-		if (true /* not facing a wall */) {
-			velocity = speed;
-		} else velocity = 0;
-		
-		x += facing.x * velocity;
-		y += facing.y * velocity;
-	}
+	abstract void move();
 
 	boolean outofBounds(int dx, int dy) {
 		if (x + dx >= 15 || y + dy >= 15 || x + dx <= 905 || y + dy <= 905)

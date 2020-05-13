@@ -44,7 +44,7 @@ public class ScoreBoard extends JPanel {
 	 * @param s amount of points to be added to the ScoreBoard
 	 */
 	public static void addScore(int s) {
-		score = s;
+		score += s;
 		scoreText.setText(score.toString());
 		if(score > HighScore.highScore) {
 			HighScore.updateHighScore(score);

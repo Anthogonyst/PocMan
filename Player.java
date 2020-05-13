@@ -24,25 +24,11 @@ public class Player extends Entity {
 		axisX = pos.x;
 		axisY = pos.y;
 		velocity = speed;
-		box = new Collider<Entity>(this, Collision.PLAYER, 4);
+		box = new Collider<Entity>(this, Collision.PLAYER, Board.BOARD_PIECE_SIZE);
 		sprite = new Sprite<Entity>(this, Board.BOARD_PIECE_SIZE, DrawOptions.PAINT_RED);
 	}
 	
 	void move() {
-		if (bufferFrames > 0) {
-			bufferFrames--;
-		} else {
-			bufferDir = facing;
-		}
-		
-		if (bufferFrames > 0 && bufferDir.equals(Direction.backwards(facing))) {
-			isBacktracking = !isBacktracking;
-			facing = bufferDir;
-			velocity = speed;
-			bufferFrames = 0;
-		}
-		
-		//ScoreBoard.addScore(bufferFrames);
 		
 		Vector2 pos = Board.queryAxis(x, y);
 		Entity nearby = Board.queryEntity(axisX, axisY);
@@ -50,40 +36,37 @@ public class Player extends Entity {
 		axisY = pos.y;
 		int state = -1;
 		
-		if (nearby != null)
+		if (nearby != null) {
 			state = box.colliding(nearby);
-		
-		if (state == 4) {
-			Direction oldDirection = facing;
-			ArrayList<Direction> dirs = Board.queryChoices(axisX, axisY);
-			
-			if (!facing.equals(bufferDir)) {
-				facing = newDirection(dirs);
-			}
-			
-			//if (!dirs.contains(facing))
-				//velocity = 0;
 		}
 		
-
+		if (!Board.isValid(axisX+facing.x, axisY+facing.y)) {
+			velocity = 0;
+		}
+		else
+			velocity = speed;
+		
+		
+		if (state == 5) {
+			System.out.println("COLLIDED WITH A GHOST");
+		} else if(state == 4) {
+			DrawCanvas.removeEntity(nearby);
+			Board.removeEntity(nearby.x/Board.BOARD_PIECE_SIZE, nearby.y/Board.BOARD_PIECE_SIZE);
+			ScoreBoard.addScore(10);
+		}
+		
+		
 		int dx = facing.x * velocity;
 		int dy = facing.y * velocity;
-
-		// Soft patch for going out of bounds; delete when there isn't something wrong
-		if (outofBounds(dx, dy)) {
-			Vector2 pos2 = Board.queryAxis(x, y);
-			axisX = pos2.x;
-			axisY = pos2.y;
-			return;
-		}
 		
 		x += dx;
 		y += dy;
 	}
 
 	void bufferDirection(Direction dir) {
-		bufferDir = dir;
-		bufferFrames = MAX_BUFFER;
+		if(Board.isValid(axisX+dir.x, axisY+dir.y)) {
+			facing = dir;
+		}
 	}
 	
 	private Direction newDirection(ArrayList<Direction> dirs) {

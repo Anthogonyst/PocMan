@@ -32,7 +32,7 @@ public class Board {
 			{false, false, false, false, false, false, true, false, false, true, true, true, true, true, true, true, true, true, true, false, false, true, false, false, false, false, false, false},
 			{false, false, false, false, false, false, true, false, false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false, false, false, false, false},
 			{false, false, false, false, false, false, true, false, false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false, false, false, false, false},
-			{false, true, true, true, true, /**/false, /**/true, true, true, true, false, false, false, false, false, false, false, false, true, true, true, true, /**/false,/**/ true, true, true, true, false}, //teleporting row
+			{false, false, false, false, false, /**/false, /**/true, true, true, true, false, false, false, false, false, false, false, false, true, true, true, true, /**/false,/**/ false, false, false, false, false}, //teleporting row
 			{false, false, false, false, false, false, true, false, false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false, false, false, false, false},
 			{false, false, false, false, false, false, true, false, false, true, false, false, false, false, false, false, false, false, true, false, false, true, false, false, false, false, false, false},
 			{false, false, false, false, false, false, true, false, false, true, true, true, true, true, true, true, true, true, true, false, false, true, false, false, false, false, false, false},
@@ -73,13 +73,13 @@ public class Board {
 			for (int i = 0; i < arr; i++) {
 				for (int j = 0; j < arrLong; j++) {
 					if (board[i][j]) {
-						Pellet p = new Pellet(i*BOARD_PIECE_SIZE, j*BOARD_PIECE_SIZE, 4);
+						Pellet p = new Pellet(i*BOARD_PIECE_SIZE, j*BOARD_PIECE_SIZE, BOARD_PIECE_SIZE);
 						DrawCanvas.addEntity(p);
 						boardEntities.put(new Vector2(i, j), p);
 						totalPellets++;
 						remainingPellets++;
 					} else {
-						Wall w = new Wall(i*BOARD_PIECE_SIZE, j*BOARD_PIECE_SIZE, BOARD_PIECE_SIZE);
+						Wall w = new Wall(i*BOARD_PIECE_SIZE, j*BOARD_PIECE_SIZE, 4);
 						//DrawCanvas.addEntity(w);
 						boardEntities.put(new Vector2(i, j), w);
 					}
@@ -148,13 +148,17 @@ public class Board {
 		return boardEntities.get(new Vector2(x, y));
 	}
 	
+	static void removeEntity(int x, int y) {
+		boardEntities.remove(new Vector2(x,y));
+	}
+	
 	/**Takes in coordinates and checks whether or not it is a valid path
 	 * 
 	 * @param x row index to be checked
 	 * @param y column index to be checked
 	 * @return true if coordinate is valid path on board
 	 */
-	boolean isValid(int x, int y) {
+	static boolean isValid(int x, int y) {
 		return board[x][y];
 	}
 }

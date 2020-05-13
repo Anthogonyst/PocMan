@@ -25,6 +25,11 @@ public class BottomPanel extends JPanel {
 		add(lp);
 		add(Box.createHorizontalGlue());
 		add(level);
+		level.addLevel();
+		level.addLevel();
+		level.addLevel();
+		level.addLevel();
+		level.addLevel();
 		
 		setBackground(Color.black);
 		setMaximumSize(new Dimension(Board.BOARD_WIDTH, 60));
