@@ -76,6 +76,7 @@ public class Sprite<T extends Entity> {
 		case PAINT_YELLOW: g.setColor(Color.YELLOW); g.fillRect(parent.x - width/2, parent.y - height/2, width, height); return;
 		case PAINT_WHITE: g.setColor(Color.WHITE); g.fillRect(parent.x - width/2, parent.y - height/2, width, height); return;
 		case PAINT_PURPLE: Color purpleish = new Color(255, 0, 255, 127); g.setColor(purpleish); g.fillRect(parent.x - width/2, parent.y - height/2, width, height); return;
+		case PLAYER: g.drawImage(Assets.pocman, parent.x, parent.y, null);//please check and fix if not correct
 		default: g.setColor(Color.RED); g.fillRect(parent.x - width/2, parent.y - height/2, width, height); return;
 		}
 	}

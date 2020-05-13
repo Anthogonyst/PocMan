@@ -22,14 +22,23 @@ public class Assets {
 	
 	public static ImageIcon fruits[] = {apple, bananas, donut, burger, cake};
     
-    public static BufferedImage pocman, ghost, pellet, superPellet, board;
+	public static BufferedImage pocman, ghost, pellet, superPellet, board;
+	
+	public static ImageIcon[] pocman;
     
     public static void init(){
         pocman = sheet.crop(-109, -53, width, height);
         ghost = sheet.crop(-166, -53, width, height);
         pellet = sheet.crop(-47, -47, 5, 5);
         superPellet = sheet.crop(-30, -120, 7, 7);
-        board = sheet.crop(-312, -4, 183, 200);
+		board = sheet.crop(-312, -4, 183, 200);
+		
+		//init array for animation frames
+		pocAnim = new ImageIcon[2];
+		pocAnim[0] = medPocMan1;
+		pocAnim[1] = medPocMan2;
+		pocAnim[2] = medPocMan3;
+
     }
 
 }

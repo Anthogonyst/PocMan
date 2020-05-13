@@ -14,6 +14,7 @@ public class Player extends Entity {
 	private boolean isBacktracking;
 	
 	private static int MAX_BUFFER = 30;
+
 	
 	public Player(int _x, int _y, int _speed) {
 		super(_x, _y, _speed);
@@ -25,7 +26,7 @@ public class Player extends Entity {
 		axisY = pos.y;
 		velocity = speed;
 		box = new Collider<Entity>(this, Collision.PLAYER, Board.BOARD_PIECE_SIZE);
-		sprite = new Sprite<Entity>(this, Board.BOARD_PIECE_SIZE, DrawOptions.PAINT_RED);
+		sprite = new Sprite<Entity>(this, Board.BOARD_PIECE_SIZE, DrawOptions.PLAYER);
 	}
 	
 	void move() {

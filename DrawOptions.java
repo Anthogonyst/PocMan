@@ -12,5 +12,6 @@ public enum DrawOptions {
 	PAINT_BLUE,
 	PAINT_YELLOW,
 	PAINT_WHITE,
-	PAINT_PURPLE;
+	PAINT_PURPLE,
+	PLAYER;
 }
