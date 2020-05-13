@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 /**
- * 
- * @author Oracle
+ * The player controlled <code>Entity</code> which when binded can be used with the <code>InputManager</code> class
+ * @author Oracle, Vin
  *
  */
 public class Player extends Entity {
@@ -16,26 +16,38 @@ public class Player extends Entity {
 	private static int MAX_BUFFER = 30;
 
 	
+	/**
+	 * Constructs a new player
+	 * @param x
+	 * @param y
+	 * @param speed
+	 */
 	public Player(int _x, int _y, int _speed) {
 		super(_x, _y, _speed);
-		bufferFrames = 0;
-		bufferDir = facing;
-		isBacktracking = false;
 		Vector2 pos = Board.queryAxis(_x, _y);
 		axisX = pos.x;
 		axisY = pos.y;
 		velocity = speed;
+		bufferFrames = 0;
+		bufferDir = facing;
+		isBacktracking = false;
 		box = new Collider<Entity>(this, Collision.PLAYER, Board.BOARD_PIECE_SIZE);
+<<<<<<< HEAD
 		sprite = new Sprite<Entity>(this, Board.BOARD_PIECE_SIZE, DrawOptions.PLAYER);
+=======
+		sprite = new Sprite<Entity>(this, Board.BOARD_PIECE_SIZE, DrawOptions.SINGLE);
+>>>>>>> a11ffa482912b36026bc2f8e09f35dc7f3055047
 	}
 	
+	/**
+	 * Dictates how the <code>Player</code> will move each frame in a <code>Board</code> environment
+	 */
 	void move() {
-		
+		Collision state = Collision.NONE;
 		Vector2 pos = Board.queryAxis(x, y);
 		Entity nearby = Board.queryEntity(axisX, axisY);
 		axisX = pos.x;
 		axisY = pos.y;
-		int state = -1;
 		
 		if (nearby != null) {
 			state = box.colliding(nearby);
@@ -47,13 +59,12 @@ public class Player extends Entity {
 		else
 			velocity = speed;
 		
-		
-		if (state == 5) {
-			System.out.println("COLLIDED WITH A GHOST");
-		} else if(state == 4) {
-			DrawCanvas.removeEntity(nearby);
-			Board.removeEntity(nearby.x/Board.BOARD_PIECE_SIZE, nearby.y/Board.BOARD_PIECE_SIZE);
-			ScoreBoard.addScore(10);
+		if (state == Collision.PELLET) {
+			if (nearby.sprite.isVisible()) {
+				nearby.sprite.setVisible(false);
+				GameManager.notifyPelletLoss();
+				ScoreBoard.addScore(10);
+			}
 		}
 		
 		
@@ -63,13 +74,28 @@ public class Player extends Entity {
 		x += dx;
 		y += dy;
 	}
-
+	
+	/**
+	 * Buffers the direction from the <code>InputManager</code> for smooth playing
+	 */
 	void bufferDirection(Direction dir) {
 		if(Board.isValid(axisX+dir.x, axisY+dir.y)) {
 			facing = dir;
 		}
 	}
 	
+	/**
+	 * Checks for collisions
+	 */
+	Collision checkCollisions() {
+		return Collision.NONE;
+	}
+	
+	/**
+	 * Validates the buffered direction
+	 * @param directions
+	 * @return <code>Direction</code>
+	 */
 	private Direction newDirection(ArrayList<Direction> dirs) {
 		if (dirs.contains(bufferDir)) {
 			return bufferDir;

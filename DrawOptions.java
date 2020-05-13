@@ -1,6 +1,7 @@
 //package Maestus.PocMan;
 
 /**
+ * A set of drawing options for the <code>Sprite</code> class
  * 
  * @author Oracle
  *

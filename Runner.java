@@ -8,9 +8,7 @@
  */
 public class Runner {
     public static void main(String[] args) {
-
-    	PocMan ex = new PocMan();
-        AppStep exa = new AppStep<PocMan>(ex);
+        AppStep<PocMan> exa = new AppStep<PocMan>(new PocMan());
         exa.start();
     }
 }

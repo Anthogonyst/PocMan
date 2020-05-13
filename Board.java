@@ -2,19 +2,19 @@
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
- * 
+ * The board class holds information about the game grid, its boundaries, and its entities
  * @author Oracle, Vincent Ndokaj
  *
  */
-public class Board {
+public final class Board {
 	
-	static int BOARD_PIECE_SIZE = 26;
+	static int BOARD_PIECE_SIZE = 30;
 	static boolean initDone = false;
 	private static HashMap<Vector2, Entity> boardEntities;
-	private static int totalPellets;
-	private static int remainingPellets;
+	private static LinkedList<Entity> nonBoardEntities;
 	
 	private final static boolean board[][] = 
 		{
@@ -54,11 +54,12 @@ public class Board {
 	static int BOARD_HEIGHT = BOARD_PIECE_SIZE*board[0].length;
 	static int BOARD_WIDTH = BOARD_PIECE_SIZE*board.length;
 	
-	
+	/*
+	 * Constructs a new board
+	 */
 	public Board() {
 		boardEntities = new HashMap<Vector2, Entity>();
-		totalPellets = 0;
-		remainingPellets = 0;
+		nonBoardEntities = new LinkedList<Entity>();
 	}
 
 	/**
@@ -66,6 +67,8 @@ public class Board {
 	 * pieces.
 	 */
 	static void initBoard() {
+		boardEntities = new HashMap<Vector2, Entity>();
+		nonBoardEntities = new LinkedList<Entity>();
 		int arr = board.length;
 		int arrLong = board[0].length;
 		
@@ -76,8 +79,7 @@ public class Board {
 						Pellet p = new Pellet(i*BOARD_PIECE_SIZE, j*BOARD_PIECE_SIZE, BOARD_PIECE_SIZE);
 						DrawCanvas.addEntity(p);
 						boardEntities.put(new Vector2(i, j), p);
-						totalPellets++;
-						remainingPellets++;
+						GameManager.notifyPelletGain();
 					} else {
 						Wall w = new Wall(i*BOARD_PIECE_SIZE, j*BOARD_PIECE_SIZE, 4);
 						//DrawCanvas.addEntity(w);
@@ -94,7 +96,34 @@ public class Board {
 		for (Vector4 d : drawOptimization) {
 			Plane optimalWall = new Plane((d.x + d.z)*BOARD_PIECE_SIZE/2, (d.y + d.w)*BOARD_PIECE_SIZE/2, (d.z - d.x + 1)*BOARD_PIECE_SIZE, (d.w - d.y + 1)*BOARD_PIECE_SIZE);
 			DrawCanvas.addEntity(optimalWall);
+			nonBoardEntities.add(optimalWall);
 		}
+		
+		initDone = true;
+		GameManager.notifyInitDone();
+	}
+	
+	/**
+	 * Removes all references to current board
+	 */
+	static void destroyBoard() {
+		int arr = board.length;
+		int arrLong = board[0].length;
+
+		for (int i = 0; i < arr; i++) {
+			for (int j = 0; j < arrLong; j++) {
+				Entity e = boardEntities.get(new Vector2(i, j));
+				DrawCanvas.removeEntity(e);
+			}
+		}
+		
+		for (Entity ne : nonBoardEntities) {
+			DrawCanvas.removeEntity(ne);
+		}
+
+		boardEntities = new HashMap<Vector2, Entity>();
+		nonBoardEntities = new LinkedList<Entity>();
+		initDone = false;
 	}
 	
 	/**Takes in coordinates and checks the grid surrounding it for valid paths. 
@@ -113,16 +142,16 @@ public class Board {
 			DrawCanvas.addEntity(d);
 		}
 		
-		if (y > 0)
+		if (y > 1)
 			if(board[x][y-1])
 				choices.add(Direction.UP);
-		if (y < board[0].length)
+		if (y < board[0].length - 1)
 			if(board[x][y+1])
 				choices.add(Direction.DOWN);
-		if (x > 0)
+		if (x > 1)
 			if(board[x-1][y])
 				choices.add(Direction.LEFT);
-		if (x < board.length)
+		if (x < board.length - 1)
 			if(board[x+1][y])
 				choices.add(Direction.RIGHT);
 		
@@ -130,6 +159,12 @@ public class Board {
 			
 	}
 	
+	/**
+	 * Queries available directions from raw coordinates
+	 * @param x
+	 * @param y
+	 * @return Directions
+	 */
 	static ArrayList<Direction> queryCoords(int x, int y) {
 		int gridX = x / BOARD_PIECE_SIZE;
 		int gridY = y / BOARD_PIECE_SIZE;
@@ -137,23 +172,40 @@ public class Board {
 		return queryChoices(gridX, gridY);
 	}
 	
+	/**
+	 * Queries axis from raw coordinates
+	 * @param x
+	 * @param y
+	 * @return Axis
+	 */
 	static Vector2 queryAxis(int x, int y) {
-		int gridX = x / BOARD_PIECE_SIZE;
-		int gridY = y / BOARD_PIECE_SIZE;
+		int gridX = (x + BOARD_PIECE_SIZE / 2) / BOARD_PIECE_SIZE;
+		int gridY = (y + BOARD_PIECE_SIZE / 2) / BOARD_PIECE_SIZE;
 		
 		return new Vector2(gridX, gridY);
 	}
 	
+	/**
+	 * Queries entity occupying axis coordinate
+	 * @param x
+	 * @param y
+	 * @return Entity
+	 */
 	static Entity queryEntity(int x, int y) {
 		return boardEntities.get(new Vector2(x, y));
 	}
 	
+	/**
+	 * Removes entity occupying axis coordinate
+	 * @param x
+	 * @param y
+	 */
 	static void removeEntity(int x, int y) {
 		boardEntities.remove(new Vector2(x,y));
 	}
 	
-	/**Takes in coordinates and checks whether or not it is a valid path
-	 * 
+	/**
+	 * Takes in coordinates and checks whether or not it is a valid path
 	 * @param x row index to be checked
 	 * @param y column index to be checked
 	 * @return true if coordinate is valid path on board

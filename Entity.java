@@ -1,8 +1,6 @@
 //package Maestus.PocMan;
 
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Rectangle;
 
 /**
  * An abstract class that shares all features common to a game object
@@ -10,13 +8,13 @@ import java.awt.Rectangle;
  *
  */
 public abstract class Entity {
-	int x = 150;
-	int y = 150;
-	int speed ;
+	int x;
+	int y;
+	int speed;
 	int velocity;
 	Direction facing;
-	Collider box;
-	Sprite sprite;
+	Collider<Entity> box;
+	Sprite<Entity> sprite;
 	
 	public Entity(int _x, int _y, int _speed) {
 		x = _x;
@@ -26,41 +24,60 @@ public abstract class Entity {
 		facing = Direction.UP;
 	}
 	
+	/**
+	 * Frame based action
+	 */
 	abstract void move();
-
-	boolean outofBounds(int dx, int dy) {
-		if (x + dx >= 15 || y + dy >= 15 || x + dx <= 905 || y + dy <= 905)
-			return false;
-		
-		if (x + dx < 15)
-			x = 890;
-			
-		if (y + dy < 15)
-			y = 890;
-			
-		if (x + dx > 905)
-			x = 30;
-		
-		if (y + dy > 905)
-			y = 30;
-		
-		return true;
-	}
 	
+	/**
+	 * Input a direction
+	 * @param dir
+	 */
 	void bufferDirection(Direction dir) {
 	}
 	
-	void updateSpeed() {
-		// increase speed every level
+	/**
+	 * Change max speed
+	 * @param speed
+	 */
+	void updateSpeed(int s) {
+		speed = s;
 	}
 	
-	boolean checkCollisions() {
-		return false;
-		// check the collisions here
+	/**
+	 * If collisions enabled, check collision
+	 * @return
+	 */
+	Collision checkCollisions() {
+		return Collision.NONE;
 	}
-	
 	
 	protected void paintComponent(Graphics g) {
+	}
+
+	/**
+	 * Checks if outside of board grid
+	 * @param dx
+	 * @param dy
+	 * @return
+	 */
+	boolean outofBounds(int dx, int dy) {
+		if (x + dx >= Board.BOARD_PIECE_SIZE/2 || y + dy >= Board.BOARD_PIECE_SIZE/2 
+				|| x + dx <= Board.BOARD_WIDTH - Board.BOARD_PIECE_SIZE/2 || y + dy <= Board.BOARD_HEIGHT - Board.BOARD_PIECE_SIZE/2)
+			return false;
 		
+		if (x + dx < Board.BOARD_PIECE_SIZE/2)
+			x = Board.BOARD_WIDTH - Board.BOARD_PIECE_SIZE;
+			
+		if (y + dy < Board.BOARD_PIECE_SIZE/2)
+			y = Board.BOARD_HEIGHT - Board.BOARD_PIECE_SIZE;
+			
+		if (x + dx > Board.BOARD_WIDTH - Board.BOARD_PIECE_SIZE/2)
+			x = Board.BOARD_PIECE_SIZE;
+		
+		if (y + dy > Board.BOARD_HEIGHT - Board.BOARD_PIECE_SIZE/2 )
+			y = Board.BOARD_PIECE_SIZE;
+		
+		return true;
 	}
 }

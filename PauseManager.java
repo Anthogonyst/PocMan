@@ -13,14 +13,23 @@ public class PauseManager {
 	private PauseManager() {
 	}
 
-	// static method to create instance of Singleton class 
+	/**
+	 * Static method to create instance of Singleton class 
+	 * @return
+	 */
 	public static PauseManager getInstance() {
 		if (single_instance == null)
 			single_instance = new PauseManager();
 		
 		return single_instance;
 	}
-
+	
+	/**
+	 * Binds the keyboard keys P
+	 * Input will pause the <code>IApplication</code> class
+	 * @param <code>IApplication</code>
+	 * @return <code>KeyAdapter</code>
+	 */
 	static KeyAdapter newPauseController(IApplication p) {
 		
 		return new KeyAdapter() {

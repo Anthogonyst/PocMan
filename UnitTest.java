@@ -32,30 +32,30 @@ public class UnitTest {
     
     @Test
     public void isIntersecting() {
-    	Entity one = new Entity(2, 2, 0);
-    	Entity two = new Entity(5, 5, 0);
+    	Entity one = new Ghost(2, 2, 0, null);
+    	Entity two = new Ghost(5, 5, 0, null);
     	assertTrue(one.box.getBounds().intersects(two.box.getBounds()));
     }
 
     @Test
     public void isIntersecting2() {
-    	Entity one = new Entity(12, 12, 0);
-    	Entity two = new Entity(12, 15, 0);
+    	Entity one = new Ghost(12, 12, 0, null);
+    	Entity two = new Ghost(12, 15, 0, null);
     	assertTrue(one.box.getBounds().intersects(two.box.getBounds()));
     }
     
     @Test
     public void isNotIntersecting() {
-    	Entity one = new Entity(0, 0, 0);
-    	Entity two = new Entity(4, 4, 0);
-    	Entity three = new Entity(11, 11, 0);
+    	Entity one = new Player(0, 0, 0);
+    	Entity two = new Pellet(4, 4, 0);
+    	Entity three = new Ghost(11, 11, 0, null);
     	assertFalse(one.box.getBounds().intersects(two.box.getBounds()));
     }
 
     @Test
     public void isNotIntersecting2() {
-    	Entity two = new Entity(4, 4, 0);
-    	Entity three = new Entity(8, 4, 0);
+    	Entity two = new Player(4, 4, 0);
+    	Entity three = new Pellet(8, 4, 0);
     	assertFalse(three.box.getBounds().intersects(two.box.getBounds()));
     }
     
@@ -63,15 +63,16 @@ public class UnitTest {
     public void isAtIntersection() {
     	Player one = new Player(30, 30, 0);
     	Pellet two = new Pellet(30, 30, 4);
-    	assertTrue(one.box.getBounds().equals(two.box.getBounds()));
+    	Collision state = (one.box.colliding(two));
+    	assertTrue(state.equals(Collision.PELLET));
     }
 
     @Test
     public void isAtIntersection2() {
     	Player one = new Player(60, 60, 0);
     	Pellet two = new Pellet(60, 60, 4);
-    	int state = one.box.colliding(two);
-    	assertTrue(state == 4);
+    	Collision state = one.box.colliding(two);
+    	assertTrue(state.equals(Collision.PELLET));
     }
     
     @Test
@@ -87,5 +88,33 @@ public class UnitTest {
 
     	System.out.println(no.x);
     	assertTrue(no.velocity == 0);
+    }
+    
+    @Test
+    public void testLerp() {
+    	Ghost g = new Ghost(Board.BOARD_PIECE_SIZE*5, Board.BOARD_PIECE_SIZE*16, 3, null);
+    	int n = 10;
+    	
+    	for (int i = 0; i < n; i++)
+    		g.move();
+    	
+    	assertTrue(false);
+    }
+    
+    @Test
+    public void queryAxis() {
+    	assertTrue(Board.queryAxis(Board.BOARD_PIECE_SIZE*5, Board.BOARD_PIECE_SIZE*6).equals(new Vector2(5, 6)));
+    }
+
+    @Test
+    public void queryAxis2() {
+    	Vector2 disp = Direction.drawVector(Direction.DOWN, 5);
+    	assertTrue(Board.queryAxis(Board.BOARD_PIECE_SIZE*5 + disp.x, Board.BOARD_PIECE_SIZE*6 + disp.y).equals(new Vector2(5, 6)));
+    }
+
+    @Test
+    public void queryAxis3() {
+    	Vector2 disp = Direction.drawVector(Direction.RIGHT, 5);
+    	assertTrue(Board.queryAxis(Board.BOARD_PIECE_SIZE*5 + disp.x, Board.BOARD_PIECE_SIZE*6).equals(new Vector2(5, 6)));
     }
 }
