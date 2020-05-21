@@ -11,12 +11,13 @@ import java.util.ArrayList;
 public class Ghost extends Entity {
 
 	private EntityStrategy<Entity> ai;
-	private Direction lerpDir;
 	private Entity target;
 	private int axisX;
 	private int axisY;
 	private int lerpX;
 	private int lerpY;
+	
+	private boolean debugPrint;
 	
 	/**
 	 * Constructs a new ghost
@@ -36,15 +37,18 @@ public class Ghost extends Entity {
 		lerpX = 0;
 		lerpY = 0;
 		target = _target;
-		lerpDir = facing;
 		velocity = speed;
+		
+		debugPrint = false;
 	}
 	
 	/**
 	 * Dictates how the ghost will move
 	 */
 	void move() {
-		System.out.println("Before: " + printIsADebugFeatureISwear());
+		if (debugPrint)
+			System.out.println("Before: " + printIsADebugFeatureISwear());
+		
 		int dx = facing.x * velocity;
 		int dy = facing.y * velocity;
 		
@@ -63,34 +67,32 @@ public class Ghost extends Entity {
 		
 		// The entity implicitly reached an intersection if this is true
 		if (lerpX >= Board.BOARD_PIECE_SIZE || lerpY >= Board.BOARD_PIECE_SIZE || lerpX < 0 || lerpY < 0) {
-			System.out.println((lerpX < 0 || lerpY < 0) + " " + lerpX + " " + lerpY);
 			Vector2 pos = Board.queryAxis(x + dx, y + dy);
 			axisX = pos.x;
 			axisY = pos.y;
 			
-			lerpX = Math.abs((lerpX + Board.BOARD_PIECE_SIZE) % Board.BOARD_PIECE_SIZE);
-			lerpY = Math.abs((lerpY + Board.BOARD_PIECE_SIZE) % Board.BOARD_PIECE_SIZE);
-
-			System.out.println((lerpX < 0 || lerpY < 0) + " " + lerpX + " " + lerpY);
+			lerpX = (lerpX + Board.BOARD_PIECE_SIZE) % Board.BOARD_PIECE_SIZE;
+			lerpY = (lerpY + Board.BOARD_PIECE_SIZE) % Board.BOARD_PIECE_SIZE;
 			
-			Direction oldDirection = facing;
-			ArrayList<Direction> dirs = Board.queryChoices(axisX, axisY);
-			facing = ai.newDirection(dirs);
-			
-			// If entity passes intersection slightly, center onto intersection and go
+			// If entity passes intersection slightly, center onto intersection
 			Vector2 correction = new Vector2(axisX*Board.BOARD_PIECE_SIZE, axisY*Board.BOARD_PIECE_SIZE);
 			x = correction.x;
 			y = correction.y;
+
+			//Direction oldDirection = facing;
+			ArrayList<Direction> dirs = Board.queryChoices(axisX, axisY);
+			facing = ai.newDirection(dirs);
 			
-			// Might need to set lerp to 0 but it seems fine so far without it; unit test for certainty
-			
-			x += dx;
-			y += dy;
+			// May be desirable to modulate extra distance as a cross product but currently it is discarded
+			//x += dx;
+			//y += dy;
 		} else {
 			x += dx;
 			y += dy;
 		}
-		System.out.println("After:  " + printIsADebugFeatureISwear());
+		
+		if (debugPrint)
+			System.out.println("After:  " + printIsADebugFeatureISwear());
 	}
 	
 	/**

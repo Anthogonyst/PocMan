@@ -20,7 +20,7 @@ import javax.swing.JPanel;
  */
 public final class PocMan extends JFrame implements IApplication {
 
-	private static final long serialVersionUID = 1;
+	private static final long serialVersionUID = GameManager.gameVersion;
 	private Entity user;
 	private Entity[] ghosts;
 	private final DrawCanvas display;
@@ -54,7 +54,7 @@ public final class PocMan extends JFrame implements IApplication {
 		ghosts = new Ghost[n];
 		
 		for (int i = 0; i < n; i++) {
-			ghosts[i] = new Ghost(Board.BOARD_PIECE_SIZE*5, Board.BOARD_PIECE_SIZE*6, 3, user);
+			ghosts[i] = new Ghost(Board.BOARD_PIECE_SIZE*5, Board.BOARD_PIECE_SIZE*6, 20, user);
 			DrawCanvas.addEntity(ghosts[i]);
 		}
 		

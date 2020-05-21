@@ -24,7 +24,7 @@ public class Assets {
     
 	public static BufferedImage pocman, ghost, pellet, superPellet, board;
 	
-	public static ImageIcon[] pocman;
+	public static ImageIcon[] pocAnim;
     
     public static void init(){
         pocman = sheet.crop(-109, -53, width, height);
@@ -34,7 +34,7 @@ public class Assets {
 		board = sheet.crop(-312, -4, 183, 200);
 		
 		//init array for animation frames
-		pocAnim = new ImageIcon[2];
+		pocAnim = new ImageIcon[3];
 		pocAnim[0] = medPocMan1;
 		pocAnim[1] = medPocMan2;
 		pocAnim[2] = medPocMan3;

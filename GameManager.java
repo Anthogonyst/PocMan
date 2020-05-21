@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public class GameManager implements Serializable {
 	
-	static long gameVersion = 1;
+	static long gameVersion = 2;
 	private static final long serialVersionUID = gameVersion;
 	private static PocMan app;
 	private static GameManager single_instance = null;

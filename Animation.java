@@ -1,3 +1,4 @@
+import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 
 public class Animation {//class for updating animation frames
@@ -24,8 +25,8 @@ public class Animation {//class for updating animation frames
         }
     }
     
-    public BufferedImage getCurrentFrame(){
+    /*public BufferedImage getCurrentFrame(){
         return frames[index];
-    }
+    }*/
     
 }

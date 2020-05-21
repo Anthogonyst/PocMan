@@ -9,6 +9,8 @@ public class Player extends Entity {
 
 	private int axisX;
 	private int axisY;
+	private int lerpX;
+	private int lerpY;
 	private int bufferFrames;
 	private Direction bufferDir;
 	private boolean isBacktracking;
@@ -27,61 +29,91 @@ public class Player extends Entity {
 		Vector2 pos = Board.queryAxis(_x, _y);
 		axisX = pos.x;
 		axisY = pos.y;
+		lerpX = 0;
+		lerpY = 0;
 		velocity = speed;
 		bufferFrames = 0;
 		bufferDir = facing;
 		isBacktracking = false;
 		box = new Collider<Entity>(this, Collision.PLAYER, Board.BOARD_PIECE_SIZE);
-<<<<<<< HEAD
-		sprite = new Sprite<Entity>(this, Board.BOARD_PIECE_SIZE, DrawOptions.PLAYER);
-=======
 		sprite = new Sprite<Entity>(this, Board.BOARD_PIECE_SIZE, DrawOptions.SINGLE);
->>>>>>> a11ffa482912b36026bc2f8e09f35dc7f3055047
 	}
 	
 	/**
 	 * Dictates how the <code>Player</code> will move each frame in a <code>Board</code> environment
 	 */
 	void move() {
-		Collision state = Collision.NONE;
-		Vector2 pos = Board.queryAxis(x, y);
 		Entity nearby = Board.queryEntity(axisX, axisY);
-		axisX = pos.x;
-		axisY = pos.y;
-		
-		if (nearby != null) {
-			state = box.colliding(nearby);
-		}
-		
-		if (!Board.isValid(axisX+facing.x, axisY+facing.y)) {
-			velocity = 0;
-		}
-		else
-			velocity = speed;
-		
-		if (state == Collision.PELLET) {
-			if (nearby.sprite.isVisible()) {
-				nearby.sprite.setVisible(false);
-				GameManager.notifyPelletLoss();
-				ScoreBoard.addScore(10);
-			}
-		}
-		
-		
+		Collision state = box.colliding(nearby);
 		int dx = facing.x * velocity;
 		int dy = facing.y * velocity;
+
+		int backwardsMod = isBacktracking ? -1 : 1;
+		lerpX += facing.x * velocity * backwardsMod;
+		lerpY += facing.y * velocity * backwardsMod;
 		
-		x += dx;
-		y += dy;
+		// Soft patch for going out of bounds; delete when there isn't something wrong
+		if (outofBounds(dx, dy)) {
+			lerpX = 0;
+			lerpY = 0;
+			Vector2 pos = Board.queryAxis(x, y);
+			axisX = pos.x;
+			axisY = pos.y;
+			return;
+		}
+		
+		if (bufferFrames > 0)
+			bufferFrames--;
+		else if (!bufferDir.equals(facing))
+			bufferDir = facing;
+
+		// The entity implicitly reached an intersection if this is true
+		if (lerpX >= Board.BOARD_PIECE_SIZE || lerpY >= Board.BOARD_PIECE_SIZE || lerpX < 0 || lerpY < 0 || state.equals(Collision.PELLET)) {
+			Vector2 pos = Board.queryAxis(x + dx, y + dy);
+			axisX = pos.x;
+			axisY = pos.y;
+
+			// Notify the pellet to initiate its events
+			if (state.equals(Collision.PELLET)) {
+				if (nearby.sprite.isVisible()) {
+					nearby.sprite.setVisible(false);
+					GameManager.notifyPelletLoss();
+					ScoreBoard.addScore(10);
+				}
+			}
+			
+			lerpX = (lerpX + Board.BOARD_PIECE_SIZE) % Board.BOARD_PIECE_SIZE;
+			lerpY = (lerpY + Board.BOARD_PIECE_SIZE) % Board.BOARD_PIECE_SIZE;
+			
+			Vector2 correction = new Vector2(axisX*Board.BOARD_PIECE_SIZE, axisY*Board.BOARD_PIECE_SIZE);
+			x = correction.x;
+			y = correction.y;
+
+			ArrayList<Direction> dirs = Board.queryChoices(axisX, axisY);
+			facing = newDirection(dirs);
+			
+			isBacktracking = false;
+		} else if (bufferFrames > 0 && bufferDir.equals(Direction.backwards(facing))) {
+			facing = bufferDir;
+			isBacktracking = !isBacktracking;
+			
+			x -= dx;
+			y -= dy;
+		} else {
+			x += dx;
+			y += dy;
+		}
 	}
 	
 	/**
 	 * Buffers the direction from the <code>InputManager</code> for smooth playing
 	 */
 	void bufferDirection(Direction dir) {
-		if(Board.isValid(axisX+dir.x, axisY+dir.y)) {
-			facing = dir;
-		}
+		if (bufferDir.equals(dir))
+			bufferFrames = 0;
+		else bufferFrames = MAX_BUFFER;
+		
+		bufferDir = dir;
 	}
 	
 	/**
@@ -98,8 +130,10 @@ public class Player extends Entity {
 	 */
 	private Direction newDirection(ArrayList<Direction> dirs) {
 		if (dirs.contains(bufferDir)) {
+			velocity = speed;
 			return bufferDir;
 		} else if (dirs.contains(facing)) {
+			velocity = speed;
 			return facing;
 		} else {
 			velocity = 0;

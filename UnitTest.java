@@ -117,4 +117,22 @@ public class UnitTest {
     	Vector2 disp = Direction.drawVector(Direction.RIGHT, 5);
     	assertTrue(Board.queryAxis(Board.BOARD_PIECE_SIZE*5 + disp.x, Board.BOARD_PIECE_SIZE*6).equals(new Vector2(5, 6)));
     }
+    
+    @Test
+    public void clampTest() {
+        long executionStamp = System.nanoTime();
+    	int testNum = 10000;
+    	
+    	for (int i = 0; i < testNum; i++) {
+    		int m = 20;
+    		int n = (int)(Math.random()*m);
+    		n = (n + m) % m;
+    		
+    		if (n >= m || n < 0)
+    			assertFalse(true);
+    	}
+    	
+    	System.out.println(System.nanoTime() - executionStamp);
+    	assertTrue(true);
+    }
 }
